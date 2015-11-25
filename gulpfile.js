@@ -20,7 +20,7 @@ var plumber = require('gulp-plumber');
 gulp.task('server', function() {
 	browserSync({
 		port: 9000,
-		server: {baseDir: ['dist']}
+		server: {baseDir: ['dist', 'images']}
 	});
 });
 
