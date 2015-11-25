@@ -5,3 +5,8 @@
 .container {
 	@include container(940px);
 }
+
+img {
+	display: block;
+	max-width: 100%;
+}
