@@ -1,1 +1,4 @@
-console.log("working");
+$ = require('jquery');
+slick = require('slick-carousel');
+
+$('#gallery').slick();
