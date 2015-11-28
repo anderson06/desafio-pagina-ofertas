@@ -12,6 +12,11 @@
 
 $font-stack: 'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif;
 
+// cores
+$cinza-claro: #663434;
+$cinza-borda: #e4e4e4;
+$laranja-borda: #fab23c;
+
 .container {
 	@include container(940px);
 }
@@ -65,4 +70,154 @@ header {
 	padding: 0 9px;
 	line-height: 70px;
 	background: rgba(0, 0, 0, 0.5);
+}
+
+.gallery-nav .slick-current {
+	opacity: .5;
+}
+
+.gallery {
+	margin-bottom: 5px;
+}
+
+.gallery-section {
+	margin-bottom: 59px;
+}
+
+// options -----------------------------
+
+.options-header {
+	overflow: hidden;
+	border-bottom: 1px solid $cinza-borda;
+	margin-bottom: 29px;
+}
+
+.options-title {
+	font-family: $font-stack;
+    font-size: 22px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 26.4px;
+    color: #323232;
+    margin-top: 6px;
+    float: left;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    margin-bottom: 4px;
+}
+
+.options-controls {
+	float: right;
+	overflow: hidden;
+}
+
+.options-control {
+	float: left;
+
+	&:first-child {
+		margin-right: 39px;
+	}
+}
+
+.options-control-label {
+	font-family: $font-stack;
+    font-size: 9px;
+    line-height: 15px;
+    color: $cinza-claro;
+    text-transform: uppercase;
+	margin-right: 5px;
+    letter-spacing: 0.9px;
+}
+
+.options-control-select {
+	width: 180px;
+	height: 27px;
+	border: 1px solid $cinza-borda;
+	border-radius: 1px;
+    box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, .3);
+    margin: 1px 0 2px;
+
+	&.diarias {
+		width: 80px;
+	}
+}
+
+.option {
+	border: 1px solid $cinza-borda;
+	overflow: hidden;
+	margin-bottom: 20px;
+	border-radius: 2px;
+	transition: border .3s;
+
+	&:hover {
+		border: 1px solid $laranja-borda;
+	}
+}
+
+.option-title {
+	font-family: $font-stack;
+    font-size: 15px;
+    line-height: 15px;
+    letter-spacing: 1.2px;
+    font-weight: bold;
+    margin-bottom: 17px;
+
+    &.saidas {
+		font-size: 13px;
+		margin-top: 1px;
+		letter-spacing: 0.9px;
+		margin-bottom: 19px;
+    }
+}
+
+.option-texto {
+	font-family: $font-stack;
+    font-size: 15px;
+    line-height: 15px;
+    letter-spacing: .8px;
+    color: $cinza-claro;
+}
+
+.numero-destaque {
+	font-family: $font-stack;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+$optionlayout: (
+	columns: 24,
+);
+
+@include layout($optionlayout);
+
+.col1, .col2, .col3, .col4 {
+	float: left;
+	height: 195px;
+	padding: 18px 0px 5px 7px;
+}
+
+.col2 {
+	padding-left: 19px;
+}
+
+.col1 {
+	width: 400px / 940px * 100%;
+	border-right: 1px solid $cinza-borda;
+}
+
+.col2 {
+	width: 160px / 940px * 100%;
+	border-right: 1px solid $cinza-borda;
+}
+
+.col3 {
+	width: 160px / 940px * 100%;
+	border-right: 1px solid $cinza-borda;
+}
+
+.col4 {
+	width: 220px / 940px * 100%;
 }
