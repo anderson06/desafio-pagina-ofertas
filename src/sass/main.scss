@@ -10,12 +10,14 @@
             box-sizing: border-box;
 }
 
-$font-stack: 'Arial Rounded MT Bold','Helvetica Rounded',Arial,sans-serif;
+$font-stack: Arial, 'Helvetica Neue', Helvetica, sans-serif;
 
 // cores
-$cinza-claro: #663434;
+$cinza-claro: #666666;
 $cinza-borda: #e4e4e4;
 $laranja-borda: #fab23c;
+$strong-orange: #ff7a01;
+$green: #3bad00;
 
 .container {
 	@include container(940px);
@@ -137,6 +139,8 @@ header {
 	border-radius: 1px;
     box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, .3);
     margin: 1px 0 2px;
+    background-color: #fff;
+    font-size: 12px;
 
 	&.diarias {
 		width: 80px;
@@ -173,18 +177,107 @@ header {
 
 .option-texto {
 	font-family: $font-stack;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.6px;
+    color: $cinza-claro;
+    padding-left: 1px;
+    word-spacing: 1.3px;
+}
+
+.option-value {
+	font-family: $font-stack;
     font-size: 15px;
     line-height: 15px;
     letter-spacing: .8px;
     color: $cinza-claro;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 19px;
+
+    .value {
+    	display: block;
+    	font-weight: bold;
+    	color: black;
+    	margin-top: 5px;
+    	margin-bottom: 3px;
+
+    	span {
+    		font-size: 31px;
+    		line-height: 32px;
+    		letter-spacing: 3px;
+    	}
+    }
+}
+
+.option-btn {
+	width: 140px;
+	height: 30px;
+	margin: 0 auto;
+	line-height: 30px;
+	background-color: $strong-orange;
+	text-transform: uppercase;
+	border: none;
+	color: white;
+	display: block;
+	font-size: 13px;
+	letter-spacing: 1px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.option-attr {
+	font-family: $font-stack;
+    font-size: 11px;
+    line-height: 11px;
+    text-align: center;
+}
+
+.separador-attrs {
+	height: 1px;
+	border: none;
+	width: 10px;
+	background-color: $cinza-claro;
+	margin: 17px auto 15px auto;
 }
 
 .numero-destaque {
 	font-family: $font-stack;
-    font-size: 24px;
-    line-height: 24px;
+	font-size: 20px;
+	line-height: 20px;
     font-weight: bold;
     text-align: center;
+    margin-bottom: 4px;
+}
+
+.diaria {
+	width: 24px;
+	height: 16px;
+	background: url(../../icons/diarias.png);
+	display: inline-block;
+}
+
+.pessoa {
+	width: 10px;
+	height: 21px;
+	background: url(../../icons/pessoas.png);
+	display: inline-block;
+}
+
+.tipo-tarifa {
+	font-family: $font-stack;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: 0.6px;
+
+    &.reembolsavel {
+    	color: $laranja-borda;
+    }
+
+    &.gratis {
+    	color: $green;
+    }
 }
 
 $optionlayout: (

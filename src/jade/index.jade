@@ -96,103 +96,22 @@ block content
 						select.options-control-select.diarias#n-diarias
 							option Escolha
 			.options
-				.option
-					.col1
-						h3.option-title Noites em Lisboa + Noites em Veneza
-						p.option-texto Atenção quarto duplo é necessário adquirir 2 pacotes
-					.col2
-						p.option-title.saidas
-							strong Saídas:
-						p.option-texto Manaus
-					.col3
-						p.numero-destaque 3 <i class="diaria">
-						p Diárias
-						hr
-						p.numero-destaque 1 <i class="pessoa">
-						p Pessoa
-					.col4
-						p $ Tarifa não reembolsável
-						p.option-texto Por apenas:
-						p R$ <strong>2.549</strong>
-						p.option-texto + taxas em até 10x
-						button Quero ir
-				.option
-					.col1
-						h3 Noites em Lisboa + Noites em Veneza
-						p Atenção quarto duplo é necessário adquirir 2 pacotes
-					.col2
-						p
-							strong Saídas:
-						p Manaus
-					.col3
-						p 3 <i class="diaria">
-						p Diárias
-						hr
-						p 1 <i class="pessoa">
-						p Pessoa
-					.col4
-						p $ Tarifa não reembolsável
-						p Por apenas:
-						p R$ <strong>2.549</strong>
-						p + taxas em até 10x
-						button Quero ir
-				.option
-					.col1
-						h3 Noites em Lisboa + Noites em Veneza
-						p Atenção quarto duplo é necessário adquirir 2 pacotes
-					.col2
-						p
-							strong Saídas:
-						p Manaus
-					.col3
-						p 3 <i class="diaria">
-						p Diárias
-						hr
-						p 1 <i class="pessoa">
-						p Pessoa
-					.col4
-						p $ Tarifa não reembolsável
-						p Por apenas:
-						p R$ <strong>2.549</strong>
-						p + taxas em até 10x
-						button Quero ir
-				.option
-					.col1
-						h3 Noites em Lisboa + Noites em Veneza
-						p Atenção quarto duplo é necessário adquirir 2 pacotes
-					.col2
-						p
-							strong Saídas:
-						p Manaus
-					.col3
-						p 3 <i class="diaria">
-						p Diárias
-						hr
-						p 1 <i class="pessoa">
-						p Pessoa
-					.col4
-						p $ Tarifa não reembolsável
-						p Por apenas:
-						p R$ <strong>2.549</strong>
-						p + taxas em até 10x
-						button Quero ir
-				.option
-					.col1
-						h3 Noites em Lisboa + Noites em Veneza
-						p Atenção quarto duplo é necessário adquirir 2 pacotes
-					.col2
-						p
-							strong Saídas:
-						p Manaus
-					.col3
-						p 3 <i class="diaria">
-						p Diárias
-						hr
-						p 1 <i class="pessoa">
-						p Pessoa
-					.col4
-						p $ Tarifa não reembolsável
-						p Por apenas:
-						p R$ <strong>2.549</strong>
-						p + taxas em até 10x
-						button Quero ir
+				each val in [1, 2, 3, 4, 5]
+					.option
+						.col1
+							h3.option-title Noites em Lisboa + Noites em Veneza
+							p.option-texto Atenção quarto duplo é necessário adquirir 2 pacotes
+						.col2
+							p.option-title.saidas
+								strong Saídas:
+							p.option-texto Manaus
+						.col3
+							p.numero-destaque 3 <i class="diaria"></i>
+							p.option-attr Diárias
+							hr.separador-attrs
+							p.numero-destaque 1 <i class="pessoa"></i>
+							p.option-attr Pessoa
+						.col4
+							p.tipo-tarifa.reembolsavel $ Tarifa não reembolsável
+							p.option-value Por apenas: <strong class="value">R$ <span>2.549</span></strong> + taxas em até 10x
+							button.option-btn Quero ir
