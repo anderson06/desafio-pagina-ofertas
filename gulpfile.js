@@ -16,11 +16,38 @@ var sourcemaps = require('gulp-sourcemaps');
 var _ = require('lodash');
 var jade = require('gulp-jade');
 var plumber = require('gulp-plumber');
+var nodemon = require('gulp-nodemon');
 
-gulp.task('server', function() {
+// we'd need a slight delay to reload browsers
+// connected to browser-sync after restarting nodemon
+var BROWSER_SYNC_RELOAD_DELAY = 500;
+
+gulp.task('nodemon', function (cb) {
+	var called = false;
+	return nodemon({
+		script: 'bin/www',
+		watch: ['app.js', 'routes/*.js'],
+	})
+	.on('start', function onStart() {
+		// ensure start only got called once
+		if (!called) { cb(); }
+		called = true;
+	})
+	.on('restart', function onRestart() {
+		// reload connected browsers after a slight delay
+		setTimeout(function reload() {
+			browserSync.reload({
+				stream: false
+			});
+		}, BROWSER_SYNC_RELOAD_DELAY);
+	});
+});
+
+gulp.task('browser-sync', ['nodemon'], function () {
 	browserSync({
+		proxy: 'http://localhost:3000',
 		port: 9000,
-		server: {baseDir: ['dist', 'images']}
+		browser: ['google-chrome']
 	});
 });
 
@@ -28,6 +55,7 @@ gulp.task('clean', function(cb) {
 	return del(['dist'], cb);
 });
 
+/*
 gulp.task('jade', function() {
 	return gulp.src('src/jade/index.jade')
 		.pipe(jade({
@@ -46,7 +74,7 @@ gulp.task('jade-build', function() {
 		}))
 		.pipe(gulp.dest('dist'));
 });
-
+*/
 gulp.task('sass', function() {
 	return gulp.src('src/sass/main.scss')
 		.pipe(sass({ style: 'expanded' }))
@@ -126,7 +154,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['clean'], function() {
-	gulp.start('jade', 'sass', 'browserify', 'watch', 'server');
+	gulp.start('sass', 'browserify', 'watch', 'browser-sync');
 });
 
 gulp.task('build', ['clean'], function() {

@@ -1,0 +1,60 @@
+extends layout
+
+block content
+	.container
+		header
+			h1.offer-title= title
+			p.offer-subtitle.bold= location
+			p.offer-subtitle= description
+
+		section.gallery-section
+			ul.gallery#gallery
+				each photo in photos
+					li
+						figure.offer-fig
+							img(src=photo alt="" width="940px" height="370px")
+							figcaption.offer-figcap Exterior do Hotel
+
+			nav.gallery-nav
+				ul#gallery-nav
+					each photo in photos
+						li
+							a
+								img(src=photo alt="" width="90px" height="60px")
+
+		section
+			nav.options-header
+				h2.options-title Escolha sua melhor opção
+				.options-controls
+					div.options-control
+						label(for="saida").options-control-label Saídas
+						select.options-control-select#saida
+							option Escolha
+					div.options-control
+						label.options-control-label(for="n-diarias") Nº de diárias
+						select.options-control-select.diarias#n-diarias
+							option Escolha
+			.options
+				each option in options
+					.option
+						.col1
+							h3.option-title= option.title
+							p.option-texto= option.description
+						.col2
+							p.option-title.saidas
+								strong Saídas:
+							each f in option.from
+								p.option-texto= f
+						.col3
+							p.numero-destaque= option.daily
+								| <i class="diaria"></i>
+							p.option-attr Diárias
+							hr.separador-attrs
+							p.numero-destaque 1 <i class="pessoa"></i>
+							p.option-attr Pessoa
+						.col4
+							p.tipo-tarifa.reembolsavel $ Tarifa não reembolsável
+							p.option-value Por apenas: <strong class="value">R$ 
+								span= option.price
+								| </strong> + taxas em até 10x
+							button.option-btn Quero ir
