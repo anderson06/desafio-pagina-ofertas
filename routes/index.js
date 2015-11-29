@@ -7,6 +7,7 @@ var _ = require('lodash');
 router.get('/', function(req, res, next) {
 	var offers = JSON.parse(fs.readFileSync(__dirname + '/../offer.json').toString());
 	var offer = _.findWhere(offers, {id: 0});
+	offer.options = _.sortBy(offer.options, 'price');
 	res.render('index', offer);
 });
 

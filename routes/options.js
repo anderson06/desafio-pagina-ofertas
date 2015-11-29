@@ -16,6 +16,8 @@ router.get('/:id', function (req, res) {
 	else 
 		options = offer.options;
 
+	options = _.sortBy(options, 'price');
+
 	res.json(options);
 
 });
