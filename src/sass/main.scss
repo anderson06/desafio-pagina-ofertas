@@ -132,6 +132,17 @@ header {
     object-fit: cover;
 }
 
+.fullscreen {
+	background-color: $preto;
+	display: none;
+	height: 100vh;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+	top: 0;
+	left: 0;
+}
+
 $gallerylayout: (
 	columns: 10,
 	gutters: 4px/90px,
