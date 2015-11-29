@@ -6,12 +6,6 @@ var thumbs = $('.gallery-thumb');
 
 thumbs.on('click', toPhoto);
 
-// $('#gallery-nav').slick({
-// 	asNavFor: '#gallery',
-// 	slidesToShow: 10,
-// 	infinite: true
-// });
-
 function init(params) {
 	offer = params.offer;
 
@@ -20,8 +14,21 @@ function init(params) {
 
 function startGallery() {
 	el.slick({
-		//asNavFor: '#gallery-nav'
-	});
+			dots: false,
+		});
+
+	$('.slick-prev').empty();
+	$('.slick-next').empty();
+
+	if (offer.photos.length >= 9) {
+		var photosLenght = $('<div></div>');
+		photosLenght.addClass('photosLenght');
+		photosLenght.text('+ ' + (offer.photos.length - 10));
+
+		$('.gallery-thumb.last').append(photosLenght)
+	}
+
+	$('.gallery-thumb.last');
 }
 
 function toPhoto() {

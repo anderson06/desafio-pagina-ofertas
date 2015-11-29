@@ -48,11 +48,17 @@ block content
 			nav.gallery-nav
 				ul#gallery-nav.gallery-thumbs
 					each photo, i in photos
-						li.gallery-thumb(data-index=i)
-							a
-								img(src=photo alt="" width="90px" height="60px")
+						if (i < 9)
+							li.gallery-thumb(data-index=i)
+								a
+									img(src=photo alt="" width="90px" height="60px")
 
-		section
+					if (photos.length >= 9)
+						li.gallery-thumb.last(data-index=i)
+								a
+									img(src=photos[9] alt="" width="90px" height="60px")
+
+		section.options-section
 			nav.options-header
 				h2.options-title Escolha sua melhor opção
 				.options-controls

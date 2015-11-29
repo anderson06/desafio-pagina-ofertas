@@ -10,6 +10,9 @@ router.get('/:id', function (req, res) {
 	var offerId = parseInt(req.params.id, 10);
 	var offer = _.findWhere(offers, {id: offerId});
 
+	// duplicate photos so we can test gallery
+	Array.prototype.push.apply(offer.photos, offer.photos);
+
 	res.json(offer);
 
 });

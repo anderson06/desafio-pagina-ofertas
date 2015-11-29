@@ -26,6 +26,7 @@
 
 .options-control {
 	float: left;
+	margin-bottom: 10px;
 
 	&:first-child {
 		margin-right: 39px;
@@ -219,16 +220,13 @@ $optionlayout: (
 	padding: 18px 0px 5px 7px;
 }
 
-.col2 {
-	padding-left: 19px;
-}
-
 .col1 {
 	width: 400px / 940px * 100%;
 	border-right: 1px solid $cinza-borda;
 }
 
 .col2 {
+	padding-left: 19px;
 	width: 160px / 940px * 100%;
 	border-right: 1px solid $cinza-borda;
 }
@@ -240,4 +238,57 @@ $optionlayout: (
 
 .col4 {
 	width: 220px / 940px * 100%;
+}
+
+@media all and (max-width: 960px) {
+	.options-section {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+}
+
+@media all and (max-width: 810px) {
+	.options-section {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
+	.col1 {
+		width: 75%;
+	}
+
+	.col2 {
+		width: 25%;
+	}
+
+	.col3 {
+		border-top: 1px solid $cinza-borda;
+		width: 25%;
+	}
+
+	.col4 {
+		border-top: 1px solid $cinza-borda;
+		width: 75%;
+	}
+}
+
+@media all and (max-width: 420px) {
+	.col1 {
+		width: 100%;
+	}
+
+	.col2 {
+		border-top: 1px solid $cinza-borda;
+		width: 50%;
+	}
+
+	.col3 {
+		border-top: 1px solid $cinza-borda;
+		width: 50%;
+	}
+
+	.col4 {
+		border-top: 1px solid $cinza-borda;
+		width: 100%;
+	}
 }
