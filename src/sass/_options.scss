@@ -1,0 +1,243 @@
+.options-header {
+	overflow: hidden;
+	border-bottom: 1px solid $cinza-borda;
+	margin-bottom: 29px;
+}
+
+.options-title {
+	font-family: $font-stack;
+    font-size: 22px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 26.4px;
+    color: #323232;
+    margin-top: 6px;
+    float: left;
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    margin-bottom: 4px;
+}
+
+.options-controls {
+	float: right;
+	overflow: hidden;
+}
+
+.options-control {
+	float: left;
+
+	&:first-child {
+		margin-right: 39px;
+	}
+}
+
+.options-control-label {
+	font-family: $font-stack;
+    font-size: 9px;
+    line-height: 15px;
+    color: $cinza-claro;
+    text-transform: uppercase;
+	margin-right: 5px;
+    letter-spacing: 0.9px;
+}
+
+.options-control-select {
+	width: 180px;
+	height: 27px;
+	border: 1px solid $cinza-borda;
+	border-radius: 1px;
+    box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, .3);
+    margin: 1px 0 2px;
+    background-color: #fff;
+    font-size: 12px;
+
+	&.diarias {
+		width: 80px;
+	}
+}
+
+.options {
+	min-height: 640px;
+}
+
+.option {
+	border: 1px solid $cinza-borda;
+	overflow: hidden;
+	margin-bottom: 20px;
+	border-radius: 2px;
+	transition: border .3s;
+	animation: optionin .3s 1;
+
+	&:hover {
+		border: 1px solid $laranja-borda;
+	}
+}
+
+@keyframes optionin {
+    from {
+    	opacity: 0;
+    	transform: translateX(-10px);
+    }
+    to {
+    	opacity: 1;
+    	transform: translateX(0);
+    }
+}
+
+.option-title {
+	font-family: $font-stack;
+    font-size: 15px;
+    line-height: 15px;
+    letter-spacing: 1.2px;
+    font-weight: bold;
+    margin-bottom: 17px;
+
+    &.saidas {
+		font-size: 13px;
+		margin-top: 1px;
+		letter-spacing: 0.9px;
+		margin-bottom: 19px;
+    }
+}
+
+.option-texto {
+	font-family: $font-stack;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.6px;
+    color: $cinza-claro;
+    padding-left: 1px;
+    word-spacing: 1.3px;
+}
+
+.option-value {
+	font-family: $font-stack;
+    font-size: 15px;
+    line-height: 15px;
+    letter-spacing: .8px;
+    color: $cinza-claro;
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 19px;
+
+    .value {
+    	display: block;
+    	font-weight: bold;
+    	color: black;
+    	margin-top: 5px;
+    	margin-bottom: 3px;
+
+    	span {
+    		font-size: 31px;
+    		line-height: 32px;
+    		letter-spacing: 3px;
+    	}
+    }
+}
+
+.option-btn {
+	width: 140px;
+	height: 30px;
+	margin: 0 auto;
+	line-height: 30px;
+	background-color: $strong-orange;
+	text-transform: uppercase;
+	border: none;
+	color: white;
+	display: block;
+	font-size: 13px;
+	letter-spacing: 1px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.option-attr {
+	font-family: $font-stack;
+    font-size: 11px;
+    line-height: 11px;
+    text-align: center;
+}
+
+.separador-attrs {
+	height: 1px;
+	border: none;
+	width: 10px;
+	background-color: $cinza-claro;
+	margin: 17px auto 15px auto;
+}
+
+.numero-destaque {
+	font-family: $font-stack;
+	font-size: 20px;
+	line-height: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.diaria {
+	width: 24px;
+	height: 16px;
+	background: url(../../icons/diarias.png);
+	display: inline-block;
+}
+
+.pessoa {
+	width: 10px;
+	height: 21px;
+	background: url(../../icons/pessoas.png);
+	display: inline-block;
+	transform: translateY(3px);
+}
+
+.tipo-tarifa {
+	font-family: $font-stack;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    letter-spacing: 0.6px;
+
+    &.reembolsavel {
+    	color: $laranja-borda;
+    }
+
+    &.gratis {
+    	color: $green;
+    }
+}
+
+$optionlayout: (
+	columns: 24,
+);
+
+@include layout($optionlayout);
+
+.col1, .col2, .col3, .col4 {
+	float: left;
+	height: 195px;
+	padding: 18px 0px 5px 7px;
+}
+
+.col2 {
+	padding-left: 19px;
+}
+
+.col1 {
+	width: 400px / 940px * 100%;
+	border-right: 1px solid $cinza-borda;
+}
+
+.col2 {
+	width: 160px / 940px * 100%;
+	border-right: 1px solid $cinza-borda;
+}
+
+.col3 {
+	width: 160px / 940px * 100%;
+	border-right: 1px solid $cinza-borda;
+}
+
+.col4 {
+	width: 220px / 940px * 100%;
+}

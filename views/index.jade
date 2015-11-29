@@ -1,6 +1,36 @@
 extends layout
 
 block content
+	script#option-template(type="text/x-handlebars-template")
+		|{{#each this}}
+		.option
+			.col1
+				h3.option-title {{title}}
+				p.option-texto {{description}}
+			.col2
+				p.option-title.saidas
+					strong Saídas:
+				|{{#each from}}
+				p.option-texto {{this}}
+				|{{/each}}
+			.col3
+				p.numero-destaque {{daily}} #[i.diaria]
+				p.option-attr Diárias
+				hr.separador-attrs
+				p.numero-destaque 1 #[i.pessoa]
+				p.option-attr Pessoa
+			.col4
+				p.tipo-tarifa.reembolsavel $ Tarifa não reembolsável
+				p.option-value Por apenas: #[strong.value R$ #[span {{price}}]] taxas em até 10x
+				button.option-btn Quero ir
+		|{{/each}}
+
+	script#optiontag-template(type="text/x-handlebars-template").
+		<option value="">Escolha</option>
+		{{#each this}}
+			<option {{#if selected}}selected{{/if}}>{{text}}</option>
+		{{/each}}
+
 	.container
 		header
 			h1.offer-title= title
@@ -16,9 +46,9 @@ block content
 							figcaption.offer-figcap Exterior do Hotel
 
 			nav.gallery-nav
-				ul#gallery-nav
-					each photo in photos
-						li
+				ul#gallery-nav.gallery-thumbs
+					each photo, i in photos
+						li.gallery-thumb(data-index=i)
 							a
 								img(src=photo alt="" width="90px" height="60px")
 
@@ -34,27 +64,4 @@ block content
 						label.options-control-label(for="n-diarias") Nº de diárias
 						select.options-control-select.diarias#n-diarias
 							option Escolha
-			.options
-				each option in options
-					.option
-						.col1
-							h3.option-title= option.title
-							p.option-texto= option.description
-						.col2
-							p.option-title.saidas
-								strong Saídas:
-							each f in option.from
-								p.option-texto= f
-						.col3
-							p.numero-destaque= option.daily
-								| <i class="diaria"></i>
-							p.option-attr Diárias
-							hr.separador-attrs
-							p.numero-destaque 1 <i class="pessoa"></i>
-							p.option-attr Pessoa
-						.col4
-							p.tipo-tarifa.reembolsavel $ Tarifa não reembolsável
-							p.option-value Por apenas: <strong class="value">R$ 
-								span= option.price
-								| </strong> + taxas em até 10x
-							button.option-btn Quero ir
+			.options#options
