@@ -1,15 +1,15 @@
 all: install run
 
 install:
-	@echo "Instaling..."
+	@echo "Installing dependencies, it might take awhile"
 	npm install
 
-test:
-	@echo "Testing..."
-	./node_modules/karma/bin/karma start karma.conf.js 
-
 run:
-	@echo "Starting..."
+	@echo "Starting application"
 	./node_modules/gulp/bin/gulp.js
+
+test:
+	@echo "Running tests"
+	./node_modules/karma/bin/karma start karma.conf.js 
 
 .PHONY: test install run
