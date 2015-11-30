@@ -147,6 +147,15 @@ gulp.task('browserify-build', function() {
 	return bundle();
 });
 
+gulp.task('test', function (done) {
+	var Server = require('karma').Server;
+
+	new Server({
+		configFile: __dirname + '/karma.conf.js',
+		singleRun: true
+	}, done).start();
+});
+
 gulp.task('watch', function() {
 	gulp.watch('src/jade/**/*.jade', ['jade']);
 	gulp.watch('src/sass/**/*.scss', ['sass']);
