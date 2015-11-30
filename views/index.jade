@@ -30,7 +30,8 @@ block content
 		{{#each this}}
 			<option {{#if selected}}selected{{/if}}>{{text}}</option>
 		{{/each}}
-
+		
+	.fullscreen(style="display: none;")
 	.container
 		header
 			h1.offer-title= title
@@ -40,23 +41,18 @@ block content
 		section.gallery-section
 			ul.gallery#gallery
 				each photo in photos
-					li
+					li.photo
 						figure.offer-fig
 							img(src=photo alt="" width="940px" height="370px")
 							figcaption.offer-figcap Exterior do Hotel
 
 			nav.gallery-nav
-				ul#gallery-nav.gallery-thumbs
+				ul#gallery-nav.gallery-thumbs(style="width:" + (95 * photos.length) + "px;")
 					each photo, i in photos
-						if (i < 9)
-							li.gallery-thumb(data-index=i)
-								a
-									img(src=photo alt="" width="90px" height="60px")
-
-					if (photos.length >= 9)
-						li.gallery-thumb.last(data-index=i)
-								a
-									img(src=photos[9] alt="" width="90px" height="60px")
+						- var last = i === (photos.length - 1) ? 'last' : '';
+						li.gallery-thumb(data-index=i class=last)
+							a
+								img(src=photo alt="" width="90px" height="60px")
 
 		section.options-section
 			nav.options-header

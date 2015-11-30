@@ -1,0 +1,31 @@
+.container {
+	@include container(940px);
+}
+
+.offer-title {
+	font-family: $font-stack;
+	font-size: 29px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 26.4px;
+	letter-spacing: 3px;
+	color: #323232;
+	margin-bottom: 6px;
+}
+
+.offer-subtitle {
+	font-family: $font-stack;
+	font-size: 14px;
+	line-height: 14px;
+
+	&.bold {
+		font-weight: bold;
+		margin-bottom: 7px;
+	}
+}
+
+header {
+	margin-top: 46px;
+	margin-bottom: 72px;
+}

@@ -44,7 +44,7 @@ function render() {
 
 	filteredOptions = _.chain(options)
 		.filter(function(option) { 
-			return selectedSaida ? _.includes(option.from, selectedSaida): true; 
+			return selectedSaida ? _.includes(option.from, selectedSaida) : true; 
 		})
 		.filter(function(option) { 
 			return selectedDiarias ? option.daily === selectedDiarias : true; 
@@ -52,6 +52,9 @@ function render() {
 		.value();
 
 	saidas = _.chain(options)
+		.filter(function(option) { 
+			return selectedDiarias ? option.daily === selectedDiarias : true; 
+		})
 		.map(function(option) { return option.from; })
 		.flatten()
 		.sort()
@@ -60,6 +63,9 @@ function render() {
 		.value();
 
 	diarias = _.chain(options)
+		.filter(function(option) { 
+			return selectedSaida ? _.includes(option.from, selectedSaida) : true; 
+		})
 		.map(function(option) { return option.daily; })
 		.sort(function(a, b) { return a - b; })
 		.uniq()
