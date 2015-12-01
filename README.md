@@ -1,37 +1,38 @@
 # Desafio Página Ofertas
 
-Neste problema você deve implementar a página de ofertas.
-Este desenvolvimento engloba a diagramação da página, a galeria de fotos, os filtros e o desenvolvimento do back end.
-A interface em anexo precisa ser implementada assim como o backend para consumir uma oferta e suas opções.
-A oferta precisa do titulo, descrição e as imagens além das opções da oferta que possuem preço, quantidade de dias, cidade de origem da partida, título e descrição.
-Tudo será avaliado. Faça o seu melhor na linguagem onde vc possui o maior domínio.
+Desafio front-end feito para o Hotel Urbano. Página de ofertas responsiva que inclui galeria de fotos e filtros de opções.
 
-***Restrições***
+***Comandos para iniciar a aplicação***
 *Eu preciso conseguir rodar seu código no mac os x OU no ubuntu;
 *Eu vou executar seu código com os seguintes comandos:
 
->1. *git clone seu-fork*
-2. *cd seu-fork*
-3. *comando para instalar dependências*
-4. *comando para executar a aplicação*
-5. *comando para executar os testes back end e front end*
+>1. *git clone https://github.com/anderson06/desafio-pagina-ofertas.git*
+2. *cd desafio-pagina-ofertas*
+3. *make*
+4. *make run*
 
-Esses comandos tem que ser o suficiente para configurar meu mac os x OU ubuntu e rodar seu programa. Pode considerar que eu tenho instalado no meu sistema Python, Java, PHP, Ruby e/ou Node. Qualquer outra dependência que eu precisar vc tem que prover.
+***Comando para testar a aplicação***
+1. *make test*
 
-***Funcionalidades
-* Quando eu realizar o filtro das opções da oferta, a página não pode ser recarregada.
-* As opções do pacote sempre devem vir ordenadas pelo preço, do menor para o maior.
-* A oferta precisa do titulo, da descrição e de suas imagens além das opções da oferta que possuem preço, quantidade de dias, cidade de origem da partida, título e descrição. 
+***Tecnologias utilizadas***
 
-***Performance***
-* Preciso que os seus serviços suportem um volume de 1000 requisições por segundo
+****Back-end****
+1. Node
+2. Express
+3. Jade
 
-***Artefatos***
-* O arquivo oferta.txt possui as informações de pacotes e suas opções.
-* A pasta imagens possui as imagens da galeria de fotos
-* Não precisa seguir a estrutura do artefato, apenas os dados.
+****Front-end****
+1. Handlebars
+2. Sass
+3. Susy
+4. Slick-carousel
+5. Browserify
+6. jQuery
+7. Lodash
 
-***Observações***
-* O desafio somente será avaliado caso todas as restrições tenham sido respeitadas.
+****Tests****
+1. Phantomjs
+2. Karma
 
-***Boa sorte ;)***
+****Automatização****
+1. Gulp
