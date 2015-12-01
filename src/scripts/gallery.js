@@ -7,6 +7,8 @@ var el = null;
 var thumbs = null;
 var thumbsWrapper = null;
 var menuContainer = null;
+var modal = null;
+var modalGallery = null;
 var thumbWidth = 94;
 var actualPage = 0;
 var menuContainerWidth = 0;
@@ -19,12 +21,16 @@ function init(params) {
 	thumbs = $('.gallery-thumb');
 	thumbsWrapper = $('.gallery-thumbs');
 	menuContainer = $('.gallery-nav');
+	modal = $('.fullscreen');
+
+	createModal();
+	startGallery();
 
 	thumbs.on('click', toPhoto);
-	
+	thumbs.on('click', '.photosLenght', openModal);
+	$('.offer-fig').on('click', openModal);
+	$('.modal-gallery-close').on('click', closeModal);
 	$(window).resize(lazyLayout);
-
-	startGallery();
 }
 
 function startGallery() {
@@ -33,6 +39,10 @@ function startGallery() {
 		})
 		.on('beforeChange', function(e, s, c, nextSlide) {
 			updateMenu(nextSlide);
+
+			if (thumbs.eq(nextSlide).find('.photosLenght').length
+				|| thumbs.eq(nextSlide).hasClass('out-of-view'))
+				openModal();
 		});
 
 	updateMenu(0);
@@ -49,11 +59,11 @@ function updateMenu(i) {
 	thumb.addClass('active');
 
 	var menuPage = Math.floor(i / getVisibleThumbs());
-	menuGoTo(menuPage);
 }
 
 function addPhotosLength() {
 	$('.photosLenght').remove();
+	$('.gallery-thumb').removeClass('out-of-view');
 
 	var index = getVisibleThumbs() - 1;
 
@@ -63,21 +73,13 @@ function addPhotosLength() {
 		photosLenght.text('+ ' + (offer.photos.length - index - 1));
 
 		$('.gallery-thumb:eq(' + index + ')').append(photosLenght);
+		$('.gallery-thumb:gt(' + index + ')').addClass('out-of-view');
 	}
 }
 
 function getVisibleThumbs() {
 	var width = $('.gallery-nav').width();
 	return Math.floor(width / thumbWidth);
-}
-
-function menuGoTo(page) {
-	if (actualPage < page)
-		thumbMenuNext(page - actualPage);
-	else if (actualPage > page)
-		thumbMenuPrev(actualPage - page);
-
-	actualPage = page;
 }
 
 function recalculateMenuPosition() {
@@ -94,16 +96,6 @@ function getLastVisibleThumbIndex() {
 	return ((Math.floor(currentSlide / visibleThumbs) + 1) * visibleThumbs) - 1;
 }
 
-function thumbMenuPrev(pages) {
-	var left = (menuContainer.width() + 10) * pages;
-	thumbsWrapper.animate({left: '+=' + left});
-}
-
-function thumbMenuNext(pages) {
-	var left = (menuContainer.width() + 10) * pages;
-	thumbsWrapper.animate({left: '-=' + left});
-}
-
 function toPhoto() {
 	var $this = $(this);
 	var photoIndex = $this.data('index');
@@ -113,11 +105,31 @@ function toPhoto() {
 }
 
 function calculateLayout() {
-	menuContainerWidth = menuContainer.width();
-	recalculateMenuPosition();
 	addPhotosLength();
+}
+
+function createModal() {
+	var source   = $("#gallerymodal-template").html();
+	var template = Handlebars.compile(source);
+	modal.html(template(offer.photos));
+	modalGallery = $('#gallery-modal');
+	modalGallery.slick({
+		dots: true,
+	});
+}
+
+function openModal() {
+	modal.addClass('open');
+	modalGallery.slick('setPosition');
+	modalGallery.slick('slickGoTo', el.slick('slickCurrentSlide'), true);
+}
+
+function closeModal() {
+	modal.removeClass('open');
 }
 
 module.exports = {
 	init: init,
+	openModal: openModal,
+	closeModal: closeModal,
 };

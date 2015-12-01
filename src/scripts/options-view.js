@@ -28,13 +28,13 @@ function init(params) {
 }
 
 function changeSaida(e) {
-	selectedSaida = saidasEl.find('option:selected').val();
+	selectedSaida = saidasEl.val();
 	render();
 	e.preventDefault();
 }
 
 function changeDiarias(e) {
-	selectedDiarias = Number(diariasEl.find('option:selected').val());
+	selectedDiarias = Number(diariasEl.val());
 	render();
 	e.preventDefault();
 }

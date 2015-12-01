@@ -1,6 +1,15 @@
 extends layout
 
 block content
+	script#gallerymodal-template(type="text/x-handlebars-template")
+		button.modal-gallery-close #[span Fechar]
+		
+		.gallery-modal-container
+			ul.gallery.modal#gallery-modal
+				|{{#each this}}
+				li.photo-modal(style="background-image: url({{this}});")
+				|{{/each}}
+
 	script#option-template(type="text/x-handlebars-template")
 		|{{#each this}}
 		.option
@@ -31,7 +40,7 @@ block content
 			<option {{#if selected}}selected{{/if}}>{{text}}</option>
 		{{/each}}
 		
-	.fullscreen(style="display: none;")
+	.fullscreen
 	.container
 		header
 			h1.offer-title= title
@@ -40,29 +49,31 @@ block content
 
 		section.gallery-section
 			ul.gallery#gallery
-				each photo in photos
-					li.photo
-						figure.offer-fig
-							img(src=photo alt="" width="940px" height="370px")
-							figcaption.offer-figcap Exterior do Hotel
+				each photo, i in photos
+					if (i < 10)
+						li.photo
+							figure.offer-fig
+								img(src=photo alt="" width="940px" height="370px")
+								figcaption.offer-figcap Exterior do Hotel
 
 			nav.gallery-nav
 				ul#gallery-nav.gallery-thumbs(style="width:" + (95 * photos.length) + "px;")
 					each photo, i in photos
-						- var last = i === (photos.length - 1) ? 'last' : '';
-						li.gallery-thumb(data-index=i class=last)
-							a
-								img(src=photo alt="" width="90px" height="60px")
+						if (i < 10)
+							- var last = (i === (photos.length - 1) || i === 9) ? 'last' : '';
+							li.gallery-thumb(data-index=i class=last)
+								a
+									img(src=photo alt="" width="90px" height="60px")
 
 		section.options-section
-			nav.options-header
+			header.options-header
 				h2.options-title Escolha sua melhor opção
-				.options-controls
-					div.options-control
+				nav.options-controls
+					.options-control
 						label(for="saida").options-control-label Saídas
 						select.options-control-select#saida
 							option Escolha
-					div.options-control
+					.options-control
 						label.options-control-label(for="n-diarias") Nº de diárias
 						select.options-control-select.diarias#n-diarias
 							option Escolha
