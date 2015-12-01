@@ -13,7 +13,7 @@ Opcionalmente utilize somente *make* para instalar dependências e iniciar a apl
 ## Comando para testar a aplicação
 >1. *make test*
 
-## Tecnologias utilizadas***
+## Tecnologias utilizadas
 
 ### Back-end
 >1. Node
