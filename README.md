@@ -5,8 +5,10 @@ Desafio front-end feito para o Hotel Urbano. Página de ofertas responsiva que i
 ## Comandos para iniciar a aplicação
 >1. *git clone https://github.com/anderson06/desafio-pagina-ofertas.git*
 2. *cd desafio-pagina-ofertas*
-3. *make*
+3. *make install*
 4. *make run*
+
+Opcionalmente utilize somente *make* para instalar dependências e iniciar a aplicação.
 
 ## Comando para testar a aplicação
 >1. *make test*
