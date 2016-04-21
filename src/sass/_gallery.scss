@@ -16,7 +16,7 @@
 	background: rgba(0, 0, 0, 0.5);
 }
 
-.gallery {
+.gallery-section .gallery {
 	margin-bottom: 5px;
 	position: relative;
 	height: 370px;
@@ -106,7 +106,7 @@
 .gallery-modal-container {
 	height: 100vh;
 
-	.slick-slider .slick-track, 
+	.slick-slider .slick-track,
 	.slick-slider .slick-list {
 		height: 100%;
 	}

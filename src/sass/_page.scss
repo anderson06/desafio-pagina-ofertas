@@ -1,31 +1,44 @@
 .container {
-	@include container(940px);
+    max-width: 940px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.offer-title {
-	font-family: $font-stack;
-	font-size: 29px;
+.offer {
+	margin-top: 46px;
+	margin-bottom: 72px;
+}
+
+.offer__title {
+	font-family: $gotham;
+	font-size: 31.8px;
 	font-style: normal;
 	font-variant: normal;
 	font-weight: bold;
 	line-height: 26.4px;
-	letter-spacing: 3px;
 	color: #323232;
 	margin-bottom: 6px;
+    margin-left: -1px;
+    letter-spacing: 0.1px;
 }
 
-.offer-subtitle {
-	font-family: $font-stack;
+.offer__place {
+	font-family: $gotham;
 	font-size: 14px;
 	line-height: 14px;
-
-	&.bold {
-		font-weight: bold;
-		margin-bottom: 7px;
-	}
+    color: #636363;
+    font-weight: 600;
+    margin-bottom: 7px;
+    padding-left: 1px;
 }
 
-header {
-	margin-top: 46px;
-	margin-bottom: 72px;
+.offer__description {
+	font-family: $gotham;
+	font-size: 14px;
+	line-height: 14px;
+    color: #656565;
+    font-weight: normal;
+    margin-bottom: 7px;
+    padding-left: 1px;
 }
+

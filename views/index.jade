@@ -3,7 +3,7 @@ extends layout
 block content
 	script#gallerymodal-template(type="text/x-handlebars-template")
 		button.modal-gallery-close #[span Fechar]
-		
+
 		.gallery-modal-container
 			ul.gallery.modal#gallery-modal
 				|{{#each this}}
@@ -39,13 +39,13 @@ block content
 		{{#each this}}
 			<option {{#if selected}}selected{{/if}}>{{text}}</option>
 		{{/each}}
-		
+
 	.fullscreen
 	.container
-		header
-			h1.offer-title= title
-			p.offer-subtitle.bold= location
-			p.offer-subtitle= description
+		header.offer
+			h1.offer__title= title
+			p.offer__place= location
+			p.offer__description= description
 
 		section.gallery-section
 			ul.gallery#gallery
