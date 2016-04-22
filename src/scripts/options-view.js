@@ -1,6 +1,9 @@
 var $ = require('jquery');
 var _ = require('lodash');
+var numberFormat = require("underscore.string/numberFormat");
 var Handlebars = require('handlebars');
+
+_.numberFormat = numberFormat;
 
 var options = [];
 var selectedSaida = null;
@@ -21,7 +24,7 @@ function init(params) {
 	saidasEl.on('change', changeSaida);
 	diariasEl.on('change', changeDiarias);
 
-	template = Handlebars.compile($("#option-template").html());
+	template = _.template($("#option-template").html());
 	optionsTpl = Handlebars.compile($("#optiontag-template").html());
 
 	render();
@@ -41,19 +44,19 @@ function changeDiarias(e) {
 
 function getFilteredOptions(selectedSaida, selectedDiarias) {
 	return _.chain(options)
-		.filter(function(option) { 
-			return selectedSaida ? _.includes(option.from, selectedSaida) : true; 
+		.filter(function(option) {
+			return selectedSaida ? _.includes(option.from, selectedSaida) : true;
 		})
-		.filter(function(option) { 
-			return selectedDiarias ? option.daily === selectedDiarias : true; 
+		.filter(function(option) {
+			return selectedDiarias ? option.daily === selectedDiarias : true;
 		})
 		.value();
 }
 
 function getFilteredFrom(selectedSaida, selectedDiarias) {
 	return _.chain(options)
-		.filter(function(option) { 
-			return selectedDiarias ? option.daily === selectedDiarias : true; 
+		.filter(function(option) {
+			return selectedDiarias ? option.daily === selectedDiarias : true;
 		})
 		.map(function(option) { return option.from; })
 		.flatten()
@@ -65,8 +68,8 @@ function getFilteredFrom(selectedSaida, selectedDiarias) {
 
 function getFilteredDaily(selectedSaida, selectedDiarias) {
 	return _.chain(options)
-		.filter(function(option) { 
-			return selectedSaida ? _.includes(option.from, selectedSaida) : true; 
+		.filter(function(option) {
+			return selectedSaida ? _.includes(option.from, selectedSaida) : true;
 		})
 		.map(function(option) { return option.daily; })
 		.sort(function(a, b) { return a - b; })
@@ -83,7 +86,7 @@ function render() {
 
 	diariasEl.empty().append(optionsTpl(filteredDaily));
 	saidasEl.empty().append(optionsTpl(filteredFrom));
-	optionsEl.empty().append(template(filteredOptions));
+	optionsEl.empty().append(template({options: filteredOptions}));
 }
 
 module.exports = {

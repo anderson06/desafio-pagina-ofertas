@@ -5,7 +5,7 @@
 }
 
 .options-title {
-	font-family: $font-stack;
+	font-family: inherit;
     font-size: 22px;
     font-style: normal;
     font-variant: normal;
@@ -34,18 +34,18 @@
 }
 
 .options-control-label {
-	font-family: $font-stack;
+	font-family: inherit;
     font-size: 9px;
     line-height: 15px;
     color: $cinza-claro;
     text-transform: uppercase;
-	margin-right: 5px;
-    letter-spacing: 0.9px;
+	margin-right: 8px;
+    letter-spacing: 0.6px;
 }
 
 .options-control-select {
 	width: 180px;
-	height: 27px;
+	height: 30px;
 	border: 1px solid $cinza-borda;
 	border-radius: 1px;
     box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, .3);
@@ -87,54 +87,49 @@
 }
 
 .option-title {
-	font-family: $font-stack;
-    font-size: 15px;
-    line-height: 15px;
-    letter-spacing: 1.2px;
-    font-weight: bold;
-    margin-bottom: 17px;
+	font-family: inherit;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.1px;
+  font-weight: 600;
+  margin-bottom: 17px;
 
-    &.saidas {
-		font-size: 13px;
-		margin-top: 1px;
-		letter-spacing: 0.9px;
-		margin-bottom: 19px;
-    }
+  &.saidas {
+    font-size: 14px;
+    margin-top: 1px;
+    margin-bottom: 19px;
+  }
 }
 
 .option-texto {
-	font-family: $font-stack;
-    font-size: 14px;
-    line-height: 16px;
-    letter-spacing: 0.6px;
-    color: $cinza-claro;
-    padding-left: 1px;
-    word-spacing: 1.3px;
+  font-size: 14px;
+  line-height: 16px;
+  color: $cinza-claro;
+  padding-left: 1px;
 }
 
 .option-value {
-	font-family: $font-stack;
-    font-size: 15px;
-    line-height: 15px;
-    letter-spacing: .8px;
-    color: $cinza-claro;
-    text-align: center;
-    margin-top: 24px;
-    margin-bottom: 19px;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: 0.1px;
+  color: $cinza-claro;
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 19px;
 
-    .value {
-    	display: block;
-    	font-weight: bold;
-    	color: black;
-    	margin-top: 5px;
-    	margin-bottom: 3px;
+  .value {
+    display: block;
+    font-weight: bold;
+    color: black;
+    margin-top: 5px;
+    margin-bottom: 3px;
 
-    	span {
-    		font-size: 31px;
-    		line-height: 32px;
-    		letter-spacing: 3px;
-    	}
+    span {
+      font-size: 31px;
+      line-height: 32px;
+      letter-spacing: 3px;
     }
+  }
 }
 
 .option-btn {
@@ -154,10 +149,10 @@
 }
 
 .option-attr {
-	font-family: $font-stack;
+	font-family: inherit;
     font-size: 11px;
     line-height: 11px;
-    text-align: center;
+    padding-left: 38%;
 }
 
 .separador-attrs {
@@ -169,12 +164,13 @@
 }
 
 .numero-destaque {
-	font-family: $font-stack;
-	font-size: 20px;
+	font-family: inherit;
+	font-size: 21px;
 	line-height: 20px;
     font-weight: bold;
-    text-align: center;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
+    padding-left: 38%;
+    margin-top: 2px;
 }
 
 .diaria {
@@ -182,6 +178,7 @@
 	height: 16px;
 	background: url(../../icons/diarias.png);
 	display: inline-block;
+    margin-left: -4px;
 }
 
 .pessoa {
@@ -190,22 +187,22 @@
 	background: url(../../icons/pessoas.png);
 	display: inline-block;
 	transform: translateY(3px);
+  margin-left: 2px;
 }
 
 .tipo-tarifa {
-	font-family: $font-stack;
-    font-size: 12px;
-    line-height: 14px;
-    text-align: center;
-    letter-spacing: 0.6px;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  letter-spacing: 0.1px;
 
-    &.reembolsavel {
-    	color: $laranja-borda;
-    }
+  &.reembolsavel {
+    color: $laranja-borda;
+  }
 
-    &.gratis {
-    	color: $green;
-    }
+  &.gratis {
+    color: $green;
+  }
 }
 
 $optionlayout: (
@@ -217,7 +214,7 @@ $optionlayout: (
 .col1, .col2, .col3, .col4 {
 	float: left;
 	height: 195px;
-	padding: 18px 0px 5px 7px;
+	padding: 17px 0px 5px 7px;
 }
 
 .col1 {

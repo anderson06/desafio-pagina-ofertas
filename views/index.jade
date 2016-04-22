@@ -1,85 +1,85 @@
 extends layout
 
 block content
-	script#gallerymodal-template(type="text/x-handlebars-template")
-		button.modal-gallery-close #[span Fechar]
+  script#gallerymodal-template(type="text/x-handlebars-template")
+    button.modal-gallery-close #[span Fechar]
 
-		.gallery-modal-container
-			ul.gallery.modal#gallery-modal
-				|{{#each this}}
-				li.photo-modal(style="background-image: url({{this}});")
-				|{{/each}}
+    .gallery-modal-container
+      ul.gallery.modal#gallery-modal
+        |{{#each this}}
+        li.photo-modal(style="background-image: url({{this}});")
+        |{{/each}}
 
-	script#option-template(type="text/x-handlebars-template")
-		|{{#each this}}
-		.option
-			.col1
-				h3.option-title {{title}}
-				p.option-texto {{description}}
-			.col2
-				p.option-title.saidas
-					strong Saídas:
-				|{{#each from}}
-				p.option-texto {{this}}
-				|{{/each}}
-			.col3
-				p.numero-destaque {{daily}} #[i.diaria]
-				p.option-attr Diárias
-				hr.separador-attrs
-				p.numero-destaque 1 #[i.pessoa]
-				p.option-attr Pessoa
-			.col4
-				p.tipo-tarifa.reembolsavel $ Tarifa não reembolsável
-				p.option-value Por apenas: #[strong.value R$ #[span {{price}}]] taxas em até 10x
-				button.option-btn Quero ir
-		|{{/each}}
+  script#option-template(type="text/x-handlebars-template")
+    | <% console.log(options) %>
+    |<% _.forEach(options, function(option) { %>
+    .option
+      .col1
+        h3.option-title <%= option.title %>
+        p.option-texto <%= option.description %>
+      .col2
+        p.option-title.saidas #[strong Saídas:]
+        |<% _.forEach(option.from, function(from) { %>
+        p.option-texto <%= from %>
+        |<% }); %>
+      .col3
+        p.numero-destaque <%= option.daily %> #[i.diaria]
+        p.option-attr Diárias
+        hr.separador-attrs
+        p.numero-destaque 1 #[i.pessoa]
+        p.option-attr Pessoa
+      .col4
+        p.tipo-tarifa.reembolsavel $ Tarifa não reembolsável
+        p.option-value Por apenas: #[strong.value R$ #[span <%= _.numberFormat(option.price, 0, ",", ".") %>]] taxas em até 10x
+        button.option-btn Quero ir
+    |<% }); %>
 
-	script#optiontag-template(type="text/x-handlebars-template").
-		<option value="">Escolha</option>
-		{{#each this}}
-			<option {{#if selected}}selected{{/if}}>{{text}}</option>
-		{{/each}}
+  script#optiontag-template(type="text/x-handlebars-template").
+    <option value="">Escolha</option>
+    {{#each this}}
+      <option {{#if selected}}selected{{/if}}>{{text}}</option>
+    {{/each}}
 
-	.fullscreen
-	.container
-		header.offer
-			h1.offer__title= title
-			p.offer__place= location
-			p.offer__description= description
+  .fullscreen
+  .container
+    header.offer
+      h1.offer__title= title
+      p.offer__place= location
+      p.offer__description= description
 
-		section.gallery-section
-			ul.gallery#gallery
-				each photo, i in photos
-					if (i < 10)
-						li.photo
-							figure.offer-fig
-								img(src=photo alt="" width="940px" height="370px")
-								figcaption.offer-figcap Exterior do Hotel
+    section.gallery-section
+      ul.gallery#gallery
+        each photo, i in photos
+          if (i < 10)
+            li.photo
+              figure.offer-fig
+                img(src=photo alt="" width="940px" height="370px")
+                figcaption.offer-figcap Exterior do Hotel
 
-			nav.gallery-nav
-				ul#gallery-nav.gallery-thumbs
-					- var extraPhotos = Math.max(photos.length - 10, 0)
-					- var thumbnails = photos.slice(0, 10)
+      nav.gallery-nav
+        ul#gallery-nav.gallery-thumbs
+          - var extraPhotos = Math.max(photos.length - 10, 0)
+          - var thumbnails = photos.slice(0, 10)
 
-					each thumbnail, i in thumbnails
+          each thumbnail, i in thumbnails
 
-						- var className = (i == thumbnails.length - 1) ? "gallery__thumb--last" : ""
-						li.gallery-thumb(data-index=i, class=className)
-							img(src=thumbnail alt="" width="90px" height="60px")
+            - var className = (i == thumbnails.length - 1) ? "gallery__thumb--last" : ""
+            li.gallery-thumb(data-index=i, class=className)
+              img(src=thumbnail alt="" width="90px" height="60px")
 
-							if (i == 9 && extraPhotos)
-								.gallery__extra-photos= "+" + extraPhotos
+              if (i == 9 && extraPhotos)
+                .gallery__extra-photos= "+" + extraPhotos
 
-		section.options-section
-			header.options-header
-				h2.options-title Escolha sua melhor opção
-				nav.options-controls
-					.options-control
-						label(for="saida").options-control-label Saídas
-						select.options-control-select#saida
-							option Escolha
-					.options-control
-						label.options-control-label(for="n-diarias") Nº de diárias
-						select.options-control-select.diarias#n-diarias
-							option Escolha
-			.options#options
+    section.options-section
+      header.options-header
+        h2.options-title Escolha sua melhor opção
+        nav.options-controls
+          .options-control
+            label(for="saida").options-control-label Saídas
+            select.options-control-select#saida
+              option Escolha
+          .options-control
+            label.options-control-label(for="n-diarias") Nº de diárias
+            select.options-control-select.diarias#n-diarias
+              option Escolha
+      .options#options

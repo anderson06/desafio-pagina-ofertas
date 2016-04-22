@@ -1,0 +1,104 @@
+// reset
+@import "reset";
+@import "base";
+
+// fontes
+@font-face {
+    font-family: 'Gotham';
+    src: url("//s.hotelurbano.com.br/f/gotham-light-webfont.eot");
+    src: url("//s.hotelurbano.com.br/f/gotham-light-webfont.eot?") format("embedded-opentype"), url("//s.hotelurbano.com.br/f/gotham-light-webfont.woff") format("woff"), url("//s.hotelurbano.com.br/f/gotham-light-webfont.ttf") format("opentype"), url("//s.hotelurbano.com.br/f/gotham-light-webfont.svg") format("svg");
+    font-weight: 200;
+    font-style: normal
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url("//s.hotelurbano.com.br/f/gotham-book-webfont.eot");
+    src: url("//s.hotelurbano.com.br/f/gotham-book-webfont.eot?") format("embedded-opentype"), url("//s.hotelurbano.com.br/f/gotham-book-webfont.woff") format("woff"), url("//s.hotelurbano.com.br/f/gotham-book-webfont.ttf") format("opentype"), url("//s.hotelurbano.com.br/f/gotham-book-webfont.svg") format("svg");
+    font-weight: normal;
+    font-style: normal
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url("//s.hotelurbano.com.br/f/gotham-medium-webfont.eot");
+    src: url("//s.hotelurbano.com.br/f/gotham-medium-webfont.eot?") format("embedded-opentype"), url("//s.hotelurbano.com.br/f/gotham-medium-webfont.woff") format("woff"), url("//s.hotelurbano.com.br/f/gotham-medium-webfont.ttf") format("opentype"), url("//s.hotelurbano.com.br/f/gotham-medium-webfont.svg") format("svg");
+    font-weight: 600;
+    font-style: normal
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url("//s.hotelurbano.com.br/f/gotham-bold-webfont.eot");
+    src: url("//s.hotelurbano.com.br/f/gotham-bold-webfont.eot?") format("embedded-opentype"), url("//s.hotelurbano.com.br/f/gotham-bold-webfont.woff") format("woff"), url("//s.hotelurbano.com.br/f/gotham-bold-webfont.ttf") format("opentype"), url("//s.hotelurbano.com.br/f/gotham-bold-webfont.svg") format("svg");
+    font-weight: 700;
+    font-style: normal
+}
+
+body,
+.container {
+    font-family: 'Gotham', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+@import "../../node_modules/slick-carousel/slick/slick.scss";
+@import "../../node_modules/select2/dist/css/select2";
+
+.select2-container--default {
+    .select2-selection--single {
+        border: 1px solid #e4e4e4;
+        border-radius: 1px;
+        box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, .3);
+        background-color: #fff;
+        height: 27px;
+
+        &:focus {
+          outline: 0;
+        }
+
+        .select2-selection__rendered {
+            color: #444;
+            font-size: 12.1px;
+            padding-left: 5.5px;
+            line-height: 25px;
+        }
+
+        .select2-selection__arrow {
+            width: 22px;
+            border-left: 1px solid #e4e4e4;
+
+            b {
+                top: 50%;
+                right: 5px;
+                border: solid transparent;
+                content: " ";
+                height: 0;
+                width: 0;
+                position: absolute;
+                pointer-events: none;
+                border-color: rgba(255,121,0,0);
+                border-top-color: #ff8a21;
+                border-width: 4px;
+                margin-left: -5px;
+                margin-top: -2.5px;
+            }
+        }
+    }
+
+    &.select2-container--open {
+        .select2-selection--single {
+            border-color: #ff8a21;
+
+            .select2-selection__arrow {
+                border-left-color: #ff8a21;
+
+                b {
+                    border-color: transparent transparent #ff8a21 transparent;
+                }
+            }
+        }
+    }
+}
+
+.select2-dropdown {
+    border-color: #ff8a21;
+    font-size: 12.1px;
+    color: #656565;
+}
+
