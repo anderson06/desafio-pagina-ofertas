@@ -12,7 +12,6 @@ var modalGallery = null;
 var thumbWidth = 94;
 var actualPage = 0;
 var menuContainerWidth = 0;
-var lazyLayout = _.debounce(calculateLayout, 300);
 
 function init(params) {
 	offer = params.offer;
@@ -30,7 +29,6 @@ function init(params) {
 	thumbs.on('click', '.photosLenght', openModal);
 	$('.offer-fig').on('click', openModal);
 	$('.modal-gallery-close').on('click', closeModal);
-	$(window).resize(lazyLayout);
 }
 
 function startGallery() {
@@ -49,8 +47,6 @@ function startGallery() {
 
 	$('.slick-prev').empty();
 	$('.slick-next').empty();
-
-	calculateLayout();
 }
 
 function updateMenu(i) {
@@ -82,30 +78,12 @@ function getVisibleThumbs() {
 	return Math.floor(width / thumbWidth);
 }
 
-function recalculateMenuPosition() {
-	var currentSlide = el.slick('slickCurrentSlide');
-	var visibleThumbs = getVisibleThumbs();
-	var currentPage = Math.floor(currentSlide / visibleThumbs);
-	var left = currentPage * menuContainer.width() * -1;
-	thumbsWrapper.animate({left: left});
-}
-
-function getLastVisibleThumbIndex() {
-	var currentSlide = el.slick('slickCurrentSlide');
-	var visibleThumbs = getVisibleThumbs();
-	return ((Math.floor(currentSlide / visibleThumbs) + 1) * visibleThumbs) - 1;
-}
-
 function toPhoto() {
 	var $this = $(this);
 	var photoIndex = $this.data('index');
 	thumbs.removeClass('active');
 	$this.addClass('active');
 	el.slick('slickGoTo', photoIndex);
-}
-
-function calculateLayout() {
-	addPhotosLength();
 }
 
 function createModal() {

@@ -57,13 +57,18 @@ block content
 								figcaption.offer-figcap Exterior do Hotel
 
 			nav.gallery-nav
-				ul#gallery-nav.gallery-thumbs(style="width:" + (95 * photos.length) + "px;")
-					each photo, i in photos
-						if (i < 10)
-							- var last = (i === (photos.length - 1) || i === 9) ? 'last' : '';
-							li.gallery-thumb(data-index=i class=last)
-								a
-									img(src=photo alt="" width="90px" height="60px")
+				ul#gallery-nav.gallery-thumbs
+					- var extraPhotos = Math.max(photos.length - 10, 0)
+					- var thumbnails = photos.slice(0, 10)
+
+					each thumbnail, i in thumbnails
+
+						- var className = (i == thumbnails.length - 1) ? "gallery__thumb--last" : ""
+						li.gallery-thumb(data-index=i, class=className)
+							img(src=thumbnail alt="" width="90px" height="60px")
+
+							if (i == 9 && extraPhotos)
+								.gallery__extra-photos= "+" + extraPhotos
 
 		section.options-section
 			header.options-header

@@ -68,7 +68,7 @@
 	top: 0;
 }
 
-.photosLenght {
+.gallery__extra-photos {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -146,17 +146,17 @@ $gallerylayout: (
 
 .gallery-thumb {
 	float: left;
-	margin-right: 5px;
+	margin-right: 4.4px;
 	position: relative;
-
-	&.last {
-		margin-right: 0;
-		position: relative;
-	}
 
 	&.active {
 		opacity: .5;
 	}
+}
+
+.gallery__thumb--last {
+	margin-right: 0;
+	position: relative;
 }
 
 .gallery-nav {
