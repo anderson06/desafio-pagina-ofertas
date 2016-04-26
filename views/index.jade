@@ -30,7 +30,7 @@ block content
         p.option-attr Pessoa
       .col4
         p.tipo-tarifa.reembolsavel $ Tarifa não reembolsável
-        p.option-value Por apenas: #[strong.value R$ #[span <%= _.numberFormat(option.price, 0, ",", ".") %>]] taxas em até 10x
+        p.option-value Por apenas: #[strong.value R$ #[span <%= _.numberFormat(option.price, 0, ",", ".") %>]] + taxas em até 10x
         button.option-btn Quero ir
     |<% }); %>
 
