@@ -5,13 +5,14 @@ block content
     button.modal-gallery-close #[span Fechar]
 
     .gallery-modal-container
+      .modal__photo(style="background-image: url({{this}});")
+
       ul.gallery.modal#gallery-modal
         |{{#each this}}
         li.photo-modal(style="background-image: url({{this}});")
         |{{/each}}
 
   script#option-template(type="text/x-handlebars-template")
-    | <% console.log(options) %>
     |<% _.forEach(options, function(option) { %>
     .option
       .col1
@@ -40,7 +41,6 @@ block content
       <option {{#if selected}}selected{{/if}}>{{text}}</option>
     {{/each}}
 
-  .fullscreen
   .container
     header.offer
       h1.offer__title= title
@@ -48,24 +48,24 @@ block content
       p.offer__description= description
 
     section.gallery-section
-      ul.gallery#gallery
-        each photo, i in photos
-          if (i < 10)
-            li.photo
-              figure.offer-fig
-                img(src=photo alt="" width="940px" height="370px")
-                figcaption.offer-figcap Exterior do Hotel
+      .gallery#gallery
+        button.slick-prev.slick-arrow(type="button")
+        button.slick-next.slick-arrow(type="button")
+        .photo
+          figure.offer-fig
+            img(src="public/assets/"+offer.photos[0] alt="" width="940px" height="370px")
+            figcaption.offer-figcap Exterior do Hotel
 
       nav.gallery-nav
         ul#gallery-nav.gallery-thumbs
-          - var extraPhotos = Math.max(photos.length - 10, 0)
-          - var thumbnails = photos.slice(0, 10)
+          - var extraPhotos = Math.max(offer.photos.length - 10, 0)
+          - var thumbnails = offer.photos.slice(0, 10)
 
           each thumbnail, i in thumbnails
 
             - var className = (i == thumbnails.length - 1) ? "gallery__thumb--last" : ""
             li.gallery-thumb(data-index=i, class=className)
-              img(src=thumbnail alt="" width="90px" height="60px")
+              img(src="public/assets/"+thumbnail alt="" width="90px" height="60px")
 
               if (i == 9 && extraPhotos)
                 .gallery__extra-photos= "+" + extraPhotos

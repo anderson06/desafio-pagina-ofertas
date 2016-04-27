@@ -25,8 +25,8 @@ var BROWSER_SYNC_RELOAD_DELAY = 500;
 gulp.task('nodemon', function (cb) {
 	var called = false;
 	return nodemon({
-		script: 'bin/www',
-		watch: ['app.js', 'routes/*.js'],
+		script: 'index.js',
+    watch: ['app/*.js'],
 	})
 	.on('start', function onStart() {
 		// ensure start only got called once
@@ -78,7 +78,7 @@ gulp.task('sass', function() {
 	return gulp.src('src/sass/*.scss')
 		.pipe(sass({ style: 'expanded' }))
 		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-		.pipe(gulp.dest('dist/assets/css'))
+		.pipe(gulp.dest('public/assets/css'))
 		.pipe(reload({ stream: true }));
 });
 
@@ -86,7 +86,7 @@ gulp.task('sass-build', function() {
 	return gulp.src('src/styles/main.scss')
 		.pipe(sass({ style: 'expanded' }))
 		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-		.pipe(gulp.dest('dist/assets/css'))
+		.pipe(gulp.dest('public/assets/css'))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(minifycss())
 		.pipe(gulp.dest('dist/prod/assets/css'));
@@ -96,10 +96,9 @@ gulp.task('browserify', function() {
 
 	var opts = _.assign({}, watchify.args, {
 			entries: ["./src/scripts/index.js"],
-			dest: "./dist/assets/js/",
+			dest: "./public/assets/js/",
 			outputName: "main.js",
 			debug: true,
-			//transform: [ [ "browserify-replace", { "replace": [ { "from": /\@\@root/g, "to": "" } ] } ] ]
 		});
 	var b = watchify(browserify(opts));
 
@@ -111,9 +110,9 @@ gulp.task('browserify', function() {
 			.pipe(source('main.js'))
 			.pipe(buffer())
 			.pipe(sourcemaps.init({loadMaps: true}))
-			.pipe(gulp.dest('./dist/assets/js/'))
+			.pipe(gulp.dest('./public/assets/js/'))
 			.pipe(sourcemaps.write('./'))
-			.pipe(gulp.dest('./dist/assets/js/'))
+			.pipe(gulp.dest('./public/assets/js/'))
 			.pipe(reload({ stream: true }));
 	}
 
@@ -124,10 +123,9 @@ gulp.task('browserify-build', function() {
 
 	var opts = _.assign({}, watchify.args, {
 			entries: ["./src/scripts/index.js"],
-			dest: "./dist/assets/js/",
+			dest: "./public/assets/js/",
 			outputName: "main.js",
 			debug: true,
-			//transform: [ [ "browserify-replace", { "replace": [ { "from": /\@\@root/g, "to": "//produrl.com/" + project } ] } ] ]
 		});
 	var b = watchify(browserify(opts));
 
@@ -138,10 +136,10 @@ gulp.task('browserify-build', function() {
 		return b.bundle()
 			.pipe(source('main.js'))
 			.pipe(buffer())
-			.pipe(gulp.dest('./dist/assets/js/'))
+			.pipe(gulp.dest('./public/assets/js/'))
 			.pipe(uglify({compress: {unused: false}}))
 			.pipe(rename({suffix: '.min'}))
-			.pipe(gulp.dest('./dist/assets/js/'));
+			.pipe(gulp.dest('./public/assets/js/'));
 	}
 
 	return bundle();

@@ -14,7 +14,7 @@
 	padding: 0 9px;
 	line-height: 70px;
 	background: rgba(0, 0, 0, 0.5);
-    font-weight: lighter;
+  font-weight: lighter;
 }
 
 .gallery-section .gallery {
@@ -51,12 +51,12 @@
 
 .slick-prev {
 	left: 0;
-	background-image: url(../../icons/slick-prev.png);
+	background-image: url(../images/icons/slick-prev.png);
 }
 
 .slick-next {
 	right: 0;
-	background-image: url(../../icons/slick-next.png);
+	background-image: url(../images/icons/slick-next.png);
 }
 
 .gallery-section {
@@ -82,7 +82,7 @@
 	color: #fff;
 	text-align: center;
 	cursor: pointer;
-    font-weight: lighter;
+  font-weight: lighter;
 }
 
 .gallery-section img {
@@ -170,8 +170,8 @@ $gallerylayout: (
 
 .photo-modal {
 	background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .out-of-view {

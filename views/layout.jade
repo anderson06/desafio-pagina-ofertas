@@ -1,12 +1,13 @@
 doctype html
 html
-	head
-		//-title= title
-		meta(name="viewport" content="width=device-width")
-		link(href="/assets/css/site.css" type="text/css" rel="stylesheet")
-		link(href="/assets/css/main.css" type="text/css" rel="stylesheet")
-	body
-		block content
-		script.
-			var offerId = #{id};
-		script(src="/assets/js/main.js")
+  head
+    //-title= title
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width")
+    link(href="public/assets/css/site.css" type="text/css" rel="stylesheet")
+    link(href="public/assets/css/main.css" type="text/css" rel="stylesheet")
+  body
+    block content
+    script.
+      var offer = !{JSON.stringify(offer)};
+    script(src="public/assets/js/main.js")
