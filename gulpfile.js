@@ -26,7 +26,7 @@ gulp.task('nodemon', function (cb) {
 	var called = false;
 	return nodemon({
 		script: 'index.js',
-    watch: ['app/*.js'],
+    watch: ['app/server/*.js', 'app/server/*.jade'],
 	})
 	.on('start', function onStart() {
 		// ensure start only got called once
@@ -54,48 +54,18 @@ gulp.task('clean', function(cb) {
 	return del(['dist'], cb);
 });
 
-/*
-gulp.task('jade', function() {
-	return gulp.src('src/jade/index.jade')
-		.pipe(jade({
-			pretty: true,
-			data: {dev : true} // can be used inside .jade files to indicate if we are in dev or prod mode
-		}))
-		.pipe(gulp.dest('dist'))
-		.pipe(reload({stream: true}));
-});
-
-gulp.task('jade-build', function() {
-	return gulp.src('src/jade/index.jade')
-		.pipe(jade({
-			pretty: false,
-			data: {dev: false}
-		}))
-		.pipe(gulp.dest('dist'));
-});
-*/
 gulp.task('sass', function() {
-	return gulp.src('src/sass/*.scss')
+  return gulp.src('app/client/sass/*.scss')
 		.pipe(sass({ style: 'expanded' }))
 		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
 		.pipe(gulp.dest('public/assets/css'))
 		.pipe(reload({ stream: true }));
 });
 
-gulp.task('sass-build', function() {
-	return gulp.src('src/styles/main.scss')
-		.pipe(sass({ style: 'expanded' }))
-		.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-		.pipe(gulp.dest('public/assets/css'))
-		.pipe(rename({suffix: '.min'}))
-		.pipe(minifycss())
-		.pipe(gulp.dest('dist/prod/assets/css'));
-});
-
 gulp.task('browserify', function() {
 
 	var opts = _.assign({}, watchify.args, {
-			entries: ["./src/scripts/index.js"],
+			entries: ["./app/client/scripts/index.js"],
 			dest: "./public/assets/js/",
 			outputName: "main.js",
 			debug: true,
@@ -119,32 +89,6 @@ gulp.task('browserify', function() {
 	return bundle();
 });
 
-gulp.task('browserify-build', function() {
-
-	var opts = _.assign({}, watchify.args, {
-			entries: ["./src/scripts/index.js"],
-			dest: "./public/assets/js/",
-			outputName: "main.js",
-			debug: true,
-		});
-	var b = watchify(browserify(opts));
-
-	b.on('update', bundle);
-	b.on('log', gutil.log);
-
-	function bundle() {
-		return b.bundle()
-			.pipe(source('main.js'))
-			.pipe(buffer())
-			.pipe(gulp.dest('./public/assets/js/'))
-			.pipe(uglify({compress: {unused: false}}))
-			.pipe(rename({suffix: '.min'}))
-			.pipe(gulp.dest('./public/assets/js/'));
-	}
-
-	return bundle();
-});
-
 gulp.task('test', function (done) {
 	var Server = require('karma').Server;
 
@@ -155,8 +99,8 @@ gulp.task('test', function (done) {
 });
 
 gulp.task('watch', function() {
-	gulp.watch('src/jade/**/*.jade', ['jade']);
-	gulp.watch('src/sass/**/*.scss', ['sass']);
+  gulp.watch('app/client/jade/**/*.jade', ['jade']);
+  gulp.watch('app/client/sass/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['clean'], function() {

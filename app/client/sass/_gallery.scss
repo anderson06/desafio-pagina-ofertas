@@ -1,8 +1,16 @@
-.offer-fig {
+.gallery {
+	margin-bottom: 59px;
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.gallery__figure {
 	position: relative;
 }
 
-.offer-figcap {
+.gallery__caption {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -17,22 +25,14 @@
   font-weight: lighter;
 }
 
-.gallery .gallery__content {
+.gallery__content {
 	margin-bottom: 5px;
 	position: relative;
 	height: 370px;
 	overflow: hidden;
 }
 
-.gallery {
-	margin-bottom: 59px;
-}
-
-.gallery img {
-  object-fit: cover;
-}
-
-.gallery-thumbs {
+.gallery__thumbs {
 	overflow: hidden;
 	position: absolute;
 	top: 0;
@@ -54,6 +54,24 @@
   font-weight: lighter;
 }
 
+.gallery__thumb {
+	float: left;
+	margin-right: 4.4px;
+	position: relative;
+}
+
+.gallery__thumb--last {
+	margin-right: 0;
+	position: relative;
+}
+
+.gallery__nav {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	height: 60px;
+}
+
 .modal {
 	background-color: rgba(0, 0, 0, .9);
 	height: 100vh;
@@ -62,15 +80,6 @@
 	z-index: 999;
 	top: 0;
 	left: 0;
-}
-
-.gallery-nav-modal {
-	width: 100%;
-	overflow: hidden;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	height: 60px;
 }
 
 .modal__close {
@@ -87,28 +96,6 @@
 	text-transform: uppercase;
 	padding: 10px;
 	cursor: pointer;
-}
-
-.gallery-thumb {
-	float: left;
-	margin-right: 4.4px;
-	position: relative;
-
-	&.active {
-		opacity: .5;
-	}
-}
-
-.gallery__thumb--last {
-	margin-right: 0;
-	position: relative;
-}
-
-.gallery-nav {
-	width: 100%;
-	overflow: hidden;
-	position: relative;
-	height: 60px;
 }
 
 .modal__navigator-wrapper {
@@ -139,6 +126,7 @@
   cursor: pointer;
 }
 
+.gallery__thumb--selected:after,
 .modal__thumb--selected:after {
   content: "";
   background-color: rgba(255, 255, 255, 0.5);
@@ -151,13 +139,8 @@
 }
 
 .modal__photo-wrapper {
-  height: 100vh;
+  height: 100%;
   padding-bottom: 80px;
-
-  .slick-slider .slick-track,
-  .slick-slider .slick-list {
-    height: 100%;
-  }
 }
 
 .modal__photo {
@@ -197,7 +180,7 @@
 }
 
 @media all and (max-width: 940px) {
-  .gallery-nav {
+  .gallery__nav {
     display: none;
   }
 }

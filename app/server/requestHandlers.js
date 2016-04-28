@@ -2,26 +2,50 @@ var fs = require("fs");
 var jade = require('jade');
 var path = require('path');
 var _ = require("lodash");
+var numberFormat = require("underscore.string/numberFormat");
+
+_.numberFormat = numberFormat;
 
 function start(response) {
     console.log("Request handle 'start' was called.");
 
-    var offers = JSON.parse(fs.readFileSync(__dirname + '/../offer.json').toString());
+    var offers = JSON.parse(fs.readFileSync(__dirname + '/data/offer.json').toString());
     var offer = _.findWhere(offers, {id: 0});
 
     // Duplica as fotos para testar a galeria
     Array.prototype.push.apply(offer.photos, offer.photos);
 
-    var templatePath = this.views + '/index.jade';
+    offer.options = _.sortBy(offer.options, 'price');
 
-    //pretty: true
+    _.forEach(offer.options, function(option) {
+      option.formattedPrice = _.numberFormat(option.price, 0, ",", ".");
+    });
 
-    jade.renderFile(templatePath, {offer: offer}, function(err, html) {
+	  var froms = _.chain(offer.options)
+      .map(function(option) { return option.from; })
+      .flatten()
+      .sort()
+      .uniq()
+      .value();
+
+	  var dailys = _.chain(offer.options)
+      .map(function(option) { return option.daily; })
+      .sort(function(a, b) { return a - b; })
+      .uniq()
+      .value();
+
+    var data = {
+      offer: offer,
+      froms: froms,
+      dailys: dailys,
+      pretty: true
+    };
+
+    jade.renderFile(this.views + '/index.jade', data, function(err, html) {
       response.writeHead(200, {"Content-Type": "text/html"});
       response.write(html);
       response.end();
     });
-
 }
 
 function staticContent(root, response, request, pathname) {

@@ -1,6 +1,10 @@
-var gallery = require('../src/scripts/gallery.js');
-var offers = require('../offer.json');
+var Gallery = require('../app/client/scripts/gallery.js');
+var model = require('../app/client/scripts/model.js');
+var offers = require('../app/server/data/offer.json');
 var _ = require('lodash');
+var $ = require('jquery');
+
+var gallery;
 
 describe('Gallery', function() {
 	var offer = {
@@ -31,50 +35,28 @@ describe('Gallery', function() {
 	beforeEach(function() {
 		jasmine.getFixtures().fixturesPath = 'base/test/fixtures';
 		loadFixtures('gallery.html');
-		gallery.init({offer: offer});
+    model.init({offer: offer});
+    gallery = new Gallery({offer: offer, model: model});
 	});
 
-	it('Should change to next photo on button click', function() {
-		var gallery = $('#gallery');
-		var thumbs = $('.gallery-thumb');
+	it('Should have a properly dom element', function() {
+    expect(gallery.$el).toExist();
+    expect(gallery.$el[0]).toBeInDOM();
+    expect(gallery.$modal[0]).not.toBeInDOM();
+    //console.log(gallery.$el.parent().html());
+    expect(gallery.$el).toHaveData("photo-index", 0);
 
-		expect(gallery.find('.slick-current img').attr('src')).toBe("images/photo6.jpg");
-		expect(thumbs.filter('.active').find('img').attr('src')).toBe("images/photo6.jpg");
-
-		gallery.find('.slick-next.slick-arrow').click();
-
-		expect(gallery.find('.slick-current img').attr('src')).toBe("images/photo8.jpg");
-		expect(thumbs.filter('.active').find('img').attr('src')).toBe("images/photo8.jpg");
+    var thumb0 = gallery.$thumbs.filter("[data-photo-index='0']");
+    expect(thumb0).toHaveClass("gallery__thumb--selected");
 	});
 
-	it('Should change to next photo on button click', function() {
-		var gallery = $('#gallery');
-		var thumbs = $('.gallery-thumb');
+  describe("Modal tests", function() {
+    beforeEach(function() {
+      gallery.$el.trigger( "click" );
+    });
 
-		expect(gallery.find('.slick-current img').attr('src')).toBe("images/photo6.jpg");
-		expect(thumbs.filter('.active').find('img').attr('src')).toBe("images/photo6.jpg");
-
-		gallery.find('.slick-prev.slick-arrow').click();
-
-		expect(gallery.find('.slick-current img').attr('src')).toBe("images/photo1.jpg");
-		expect(thumbs.filter('.active').find('img').attr('src')).toBe("images/photo1.jpg");
-	});
-
-	it('Should open modal', function() {
-		var thumbs = $('.gallery-thumb');
-		var modal = $('.fullscreen');
-
-		gallery.openModal();
-
-		expect(modal.hasClass('open')).toBe(true);
-	});
-
-	it('Should close modal', function() {
-		var modal = $('.fullscreen');
-
-		gallery.openModal();
-		gallery.closeModal();
-
-		expect(modal.hasClass('open')).toBe(false);
-	});
+    it ("should open modal on correct photo", function() {
+      expect(gallery.$modal[0]).toBeInDOM();
+    });
+  });
 });

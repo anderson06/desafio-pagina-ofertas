@@ -1,6 +1,5 @@
 // reset
 @import "reset";
-@import "base";
 
 // fontes
 @font-face {
@@ -10,6 +9,7 @@
     font-weight: 200;
     font-style: normal
 }
+
 @font-face {
     font-family: 'Gotham';
     src: url("//s.hotelurbano.com.br/f/gotham-book-webfont.eot");
@@ -17,6 +17,7 @@
     font-weight: normal;
     font-style: normal
 }
+
 @font-face {
     font-family: 'Gotham';
     src: url("//s.hotelurbano.com.br/f/gotham-medium-webfont.eot");
@@ -24,6 +25,7 @@
     font-weight: 600;
     font-style: normal
 }
+
 @font-face {
     font-family: 'Gotham';
     src: url("//s.hotelurbano.com.br/f/gotham-bold-webfont.eot");
@@ -32,13 +34,23 @@
     font-style: normal
 }
 
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
 body,
 .container {
     font-family: 'Gotham', Arial, 'Helvetica Neue', Helvetica, sans-serif;
 }
 
-@import "../../node_modules/slick-carousel/slick/slick.scss";
-@import "../../node_modules/select2/dist/css/select2";
+img {
+	display: block;
+	max-width: 100%;
+}
+
+@import "../../../node_modules/select2/dist/css/select2";
 
 .select2-container--default {
     .select2-selection--single {

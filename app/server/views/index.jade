@@ -1,0 +1,116 @@
+extends layout
+
+block content
+  .container
+    header.offer
+      h1.offer__title= offer.title
+      p.offer__place= offer.location
+      p.offer__description= offer.description
+
+    section.gallery
+      .gallery__content#gallery(data-photo-index=0)
+        button.arrow--prev.arrow(type="button")
+        button.arrow--next.arrow(type="button")
+        .gallery__photo
+          figure.gallery__figure
+            img(src="public/assets/"+offer.photos[0] alt="" width="940px" height="370px")
+            figcaption.gallery__caption Exterior do Hotel
+
+      nav.gallery__nav
+        ul#gallery-nav.gallery__thumbs
+          - var extraPhotos = Math.max(offer.photos.length - 10, 0)
+          - var thumbnails = offer.photos.slice(0, 10)
+
+          each thumbnail, i in thumbnails
+            - var className = "";
+            - if (i == thumbnails.length - 1) { className += "gallery__thumb--last"; }
+            - if (i == 0) { className += " gallery__thumb--selected"; }
+
+            li.gallery__thumb(data-photo-index=i, class=className)
+              img(src="public/assets/"+thumbnail alt="" width="90px" height="60px")
+
+              if (i == 9 && extraPhotos)
+                .gallery__extra-photos= "+" + extraPhotos
+
+    section.options
+      header.options__header
+        h2.options__title Escolha sua melhor opção
+        nav.options__controls
+          .options__control
+            label(for="saida").options__control-label Saídas
+            select.options__control-select#saida
+              option(value="todas") Todas
+              each from in froms
+                option= from
+          .options__control
+            label.options__control-label(for="n-diarias") Nº de diárias
+            select.options__control-select.options__control-select--daily#n-diarias
+              option(value="todas") Todas
+              each daily in dailys
+                option= daily
+
+      .options__list#options
+        each option in offer.options
+          .option
+            .option__description
+              h3.option__title= option.title
+              p.option__texto= option.description
+            .option__froms
+              p.option__title.option__title--from #[strong Saídas:]
+              each from in option.from
+                p.option__texto= from
+            .option__dailys
+              p.option__destaque #[span= option.daily] #[i.option__daily]
+              p.option__attr Diárias
+              hr.option__separator
+              p.option__destaque 1 #[i.option__person]
+              p.option__attr Pessoa
+            .option__price
+              p.option__tarifa.option__tarifa--reembolsavel $ Tarifa não reembolsável
+              p.option__value Por apenas: #[strong.option__value-strong R$ #[span= option.formattedPrice]] + taxas em até 10x
+              button.option__btn Quero ir
+
+  script#gallerymodal-template(type="text/x-handlebars-template")
+    button.modal__close #[span Fechar]
+    button.arrow--prev.arrow(type="button")
+    button.arrow--next.arrow(type="button")
+
+    .modal__photo-wrapper
+      .modal__photo(style!="background-image: url(public/assets/<%= offer.photos[index] %>);")
+
+    .modal__navigator-wrapper
+      ul.modal__navigator#gallery-modal
+        |<% for (var i = 0; i < offer.photos.length; i++) { %>
+        |<% var selectedClass = i === index ? "modal__thumb--selected" : "" %>
+        li.modal__thumb(style!="background-image: url(public/assets/<%= offer.photos[i] %>);", class!="<%= selectedClass %>", data-photo-index!="<%= i %>")
+        |<% } %>
+
+  script#option-template(type="text/x-handlebars-template")
+    |<% _.forEach(options, function(option) { %>
+    .option
+      .option__description
+        h3.option__title <%= option.title %>
+        p.option__texto <%= option.description %>
+      .option__froms
+        p.option__title.option__title--from #[strong Saídas:]
+        |<% _.forEach(option.from, function(from) { %>
+        p.option__texto <%= from %>
+        |<% }); %>
+      .option__dailys
+        p.option__destaque <%= option.daily %> #[i.diaria]
+        p.option__attr Diárias
+        hr.option__separator
+        p.option__destaque 1 #[i.pessoa]
+        p.option__attr Pessoa
+      .option__price
+        p.option__tarifa.option__tarifa--reembolsavel $ Tarifa não reembolsável
+        p.option__value Por apenas: #[strong.option__value-strong R$ #[span <%= _.numberFormat(option.price, 0, ",", ".") %>]] + taxas em até 10x
+        button.option__btn Quero ir
+    |<% }); %>
+
+  script#optiontag-template(type="text/x-handlebars-template").
+    <option value="todas">Todas</option>
+    <% _.forEach(options, function(option) { %>
+      <option <% if (option.selected) { %>selected<% } %>><%= option.text %></option>
+    <% }); %>
+

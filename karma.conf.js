@@ -3,20 +3,20 @@ module.exports = function(config) {
 		browsers: ['PhantomJS'],
 
 		frameworks: [
-			'browserify', 
 			'jasmine-jquery',
-			'jasmine', 
-			'jquery-2.1.0'
+			'jasmine',
+			'browserify',
 		],
 
 		files: [
 			//'src/scripts/**/*.js',
+      //'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
 			'test/**/*.spec.js',
-			{ 
+			{
 				pattern:  'test/fixtures/*.html',
 				watched: true,
 				included: false,
-				served: true 
+				served: true
 			}
 		],
 
@@ -27,10 +27,9 @@ module.exports = function(config) {
 
 		plugins: [
 			'karma-phantomjs-launcher',
-			'karma-jasmine',
 			'karma-jasmine-jquery',
+			'karma-jasmine',
 			'karma-browserify',
-			'karma-jquery'
 		],
 
 		browserify: {

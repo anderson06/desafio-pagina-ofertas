@@ -1,30 +1,30 @@
-.options-header {
+.options__header {
 	overflow: hidden;
 	border-bottom: 1px solid $cinza-borda;
 	margin-bottom: 29px;
 }
 
-.options-title {
+.options__title {
 	font-family: inherit;
-    font-size: 22px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: bold;
-    line-height: 26.4px;
-    color: #323232;
-    margin-top: 6px;
-    float: left;
-    text-transform: uppercase;
-    letter-spacing: 0px;
-    margin-bottom: 4px;
+  font-size: 22px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: bold;
+  line-height: 26.4px;
+  color: #323232;
+  margin-top: 6px;
+  float: left;
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  margin-bottom: 4px;
 }
 
-.options-controls {
+.options__controls {
 	float: right;
 	overflow: hidden;
 }
 
-.options-control {
+.options__control {
 	float: left;
 	margin-bottom: 10px;
 
@@ -33,32 +33,32 @@
 	}
 }
 
-.options-control-label {
+.options__control-label {
 	font-family: inherit;
-    font-size: 9px;
-    line-height: 15px;
-    color: $cinza-claro;
-    text-transform: uppercase;
+  font-size: 9px;
+  line-height: 15px;
+  color: $cinza-claro;
+  text-transform: uppercase;
 	margin-right: 8px;
-    letter-spacing: 0.6px;
+  letter-spacing: 0.6px;
 }
 
-.options-control-select {
+.options__control-select {
 	width: 180px;
 	height: 30px;
 	border: 1px solid $cinza-borda;
 	border-radius: 1px;
-    box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, .3);
-    margin: 1px 2px 2px 0;
-    background-color: #fff;
-    font-size: 12px;
-
-	&.diarias {
-		width: 80px;
-	}
+  box-shadow: 1px 1px 7px -2px rgba(0, 0, 0, .3);
+  margin: 1px 2px 2px 0;
+  background-color: #fff;
+  font-size: 12px;
 }
 
-.options {
+.options__control-select--daily {
+  width: 80px;
+}
+
+.options__list {
 	min-height: 640px;
 }
 
@@ -76,39 +76,40 @@
 }
 
 @keyframes optionin {
-    from {
-    	opacity: 0;
-    	transform: translateX(-10px);
-    }
-    to {
-    	opacity: 1;
-    	transform: translateX(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.option-title {
+.option__title {
 	font-family: inherit;
   font-size: 16px;
   line-height: 16px;
   letter-spacing: 0.1px;
   font-weight: 600;
   margin-bottom: 17px;
-
-  &.saidas {
-    font-size: 14px;
-    margin-top: 1px;
-    margin-bottom: 19px;
-  }
 }
 
-.option-texto {
+.option__title--from {
+  font-size: 14px;
+  margin-top: 1px;
+  margin-bottom: 19px;
+}
+
+.option__texto {
   font-size: 14px;
   line-height: 16px;
   color: $cinza-claro;
   padding-left: 1px;
 }
 
-.option-value {
+.option__value {
   font-size: 15px;
   line-height: 15px;
   letter-spacing: 0.1px;
@@ -116,23 +117,23 @@
   text-align: center;
   margin-top: 24px;
   margin-bottom: 19px;
+}
 
-  .value {
-    display: block;
-    font-weight: bold;
-    color: black;
-    margin-top: 5px;
-    margin-bottom: 3px;
+.option__value-strong {
+  display: block;
+  font-weight: bold;
+  color: black;
+  margin-top: 5px;
+  margin-bottom: 3px;
 
-    span {
-      font-size: 31px;
-      line-height: 32px;
-      letter-spacing: 3px;
-    }
+  span {
+    font-size: 31px;
+    line-height: 32px;
+    letter-spacing: 3px;
   }
 }
 
-.option-btn {
+.option__btn {
 	width: 140px;
 	height: 30px;
 	margin: 0 auto;
@@ -149,14 +150,14 @@
   font-family: $gotham;
 }
 
-.option-attr {
+.option__attr {
 	font-family: inherit;
-    font-size: 11px;
-    line-height: 11px;
-    padding-left: 38%;
+  font-size: 11px;
+  line-height: 11px;
+  padding-left: 38%;
 }
 
-.separador-attrs {
+.option__separator {
 	height: 1px;
 	border: none;
 	width: 10px;
@@ -164,25 +165,25 @@
 	margin: 17px auto 15px auto;
 }
 
-.numero-destaque {
+.option__destaque {
 	font-family: inherit;
 	font-size: 21px;
 	line-height: 20px;
-    font-weight: bold;
-    margin-bottom: 3px;
-    padding-left: 38%;
-    margin-top: 2px;
+  font-weight: bold;
+  margin-bottom: 3px;
+  padding-left: 38%;
+  margin-top: 2px;
 }
 
-.diaria {
+.option__daily {
 	width: 24px;
 	height: 16px;
 	background: url(../images/icons/diarias.png);
 	display: inline-block;
-    margin-left: -4px;
+  margin-left: -4px;
 }
 
-.pessoa {
+.option__person {
 	width: 10px;
 	height: 21px;
 	background: url(../images/icons/pessoas.png);
@@ -191,101 +192,98 @@
   margin-left: 2px;
 }
 
-.tipo-tarifa {
+.option__tarifa {
   font-size: 12px;
   line-height: 14px;
   text-align: center;
   letter-spacing: 0.1px;
-
-  &.reembolsavel {
-    color: $laranja-borda;
-  }
-
-  &.gratis {
-    color: $green;
-  }
 }
 
-$optionlayout: (
-	columns: 24,
-);
+.option__tarifa--reembolsavel {
+  color: $laranja-borda;
+}
 
-@include layout($optionlayout);
+.option__tarifa--gratis {
+  color: $green;
+}
 
-.col1, .col2, .col3, .col4 {
+.option__description,
+.option__froms,
+.option__dailys,
+.option__price {
 	float: left;
 	height: 195px;
 	padding: 17px 0px 5px 7px;
 }
 
-.col1 {
+.option__description {
 	width: 400px / 940px * 100%;
 	border-right: 1px solid $cinza-borda;
 }
 
-.col2 {
+.option__froms {
 	padding-left: 19px;
 	width: 160px / 940px * 100%;
 	border-right: 1px solid $cinza-borda;
 }
 
-.col3 {
+.option__dailys {
 	width: 160px / 940px * 100%;
 	border-right: 1px solid $cinza-borda;
 }
 
-.col4 {
+.option__price {
 	width: 220px / 940px * 100%;
 }
 
 @media all and (max-width: 960px) {
-	.options-section {
+	.options {
 		margin-left: 10px;
 		margin-right: 10px;
 	}
 }
 
 @media all and (max-width: 810px) {
-	.options-section {
+	.options {
 		margin-left: 10px;
 		margin-right: 10px;
 	}
 
-	.col1 {
+	.option__description {
 		width: 75%;
 	}
 
-	.col2 {
+	.option__froms {
 		width: 25%;
 	}
 
-	.col3 {
+	.option__dailys {
 		border-top: 1px solid $cinza-borda;
 		width: 25%;
 	}
 
-	.col4 {
+	.option__price {
 		border-top: 1px solid $cinza-borda;
 		width: 75%;
 	}
 }
 
 @media all and (max-width: 420px) {
-	.col1 {
+	.option__description {
 		width: 100%;
 	}
 
-	.col2 {
+	.option__froms {
 		border-top: 1px solid $cinza-borda;
 		width: 50%;
 	}
 
-	.col3 {
+	.option__dailys {
 		border-top: 1px solid $cinza-borda;
 		width: 50%;
 	}
 
-	.col4 {
+	.option__price {
 		border-top: 1px solid $cinza-borda;
 		width: 100%;
 	}

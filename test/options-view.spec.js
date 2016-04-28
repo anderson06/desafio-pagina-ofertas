@@ -1,5 +1,5 @@
-var optionsView = require('../src/scripts/options-view.js');
-var offers = require('../offer.json');
+var optionsView = require('../app/client/scripts/options-view.js');
+var offers = require('../app/server/data/offer.json');
 var _ = require('lodash');
 
 describe('options-view', function() {
