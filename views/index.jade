@@ -2,15 +2,19 @@ extends layout
 
 block content
   script#gallerymodal-template(type="text/x-handlebars-template")
-    button.modal-gallery-close #[span Fechar]
+    button.modal__close #[span Fechar]
+    button.arrow--prev.arrow(type="button")
+    button.arrow--next.arrow(type="button")
 
-    .gallery-modal-container
-      .modal__photo(style="background-image: url({{this}});")
+    .modal__photo-wrapper
+      .modal__photo(style!="background-image: url(public/assets/<%= offer.photos[index] %>);")
 
-      ul.gallery.modal#gallery-modal
-        |{{#each this}}
-        li.photo-modal(style="background-image: url({{this}});")
-        |{{/each}}
+    .modal__navigator-wrapper
+      ul.modal__navigator#gallery-modal
+        |<% for (var i = 0; i < offer.photos.length; i++) { %>
+        |<% var selectedClass = i === index ? "modal__thumb--selected" : "" %>
+        li.modal__thumb(style!="background-image: url(public/assets/<%= offer.photos[i] %>);", class!="<%= selectedClass %>", data-photo-index!="<%= i %>")
+        |<% } %>
 
   script#option-template(type="text/x-handlebars-template")
     |<% _.forEach(options, function(option) { %>
@@ -43,14 +47,14 @@ block content
 
   .container
     header.offer
-      h1.offer__title= title
-      p.offer__place= location
-      p.offer__description= description
+      h1.offer__title= offer.title
+      p.offer__place= offer.location
+      p.offer__description= offer.description
 
-    section.gallery-section
-      .gallery#gallery
-        button.slick-prev.slick-arrow(type="button")
-        button.slick-next.slick-arrow(type="button")
+    section.gallery
+      .gallery__content#gallery(data-photo-index=0)
+        button.arrow--prev.arrow(type="button")
+        button.arrow--next.arrow(type="button")
         .photo
           figure.offer-fig
             img(src="public/assets/"+offer.photos[0] alt="" width="940px" height="370px")
@@ -64,7 +68,7 @@ block content
           each thumbnail, i in thumbnails
 
             - var className = (i == thumbnails.length - 1) ? "gallery__thumb--last" : ""
-            li.gallery-thumb(data-index=i, class=className)
+            li.gallery-thumb(data-photo-index=i, class=className)
               img(src="public/assets/"+thumbnail alt="" width="90px" height="60px")
 
               if (i == 9 && extraPhotos)

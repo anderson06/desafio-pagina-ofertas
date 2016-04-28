@@ -9,6 +9,9 @@ function start(response) {
     var offers = JSON.parse(fs.readFileSync(__dirname + '/../offer.json').toString());
     var offer = _.findWhere(offers, {id: 0});
 
+    // Duplica as fotos para testar a galeria
+    Array.prototype.push.apply(offer.photos, offer.photos);
+
     var templatePath = this.views + '/index.jade';
 
     //pretty: true

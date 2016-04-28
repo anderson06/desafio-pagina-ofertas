@@ -39,8 +39,6 @@ function getFilteredDaily(selectedSaida, selectedDiarias) {
 }
 
 module.exports = {
-	init: init,
-	sync: sync,
 	offer: function() { return offer; },
 	getFilteredOptions: getFilteredOptions,
 	getFilteredFrom: getFilteredFrom,

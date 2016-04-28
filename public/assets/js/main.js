@@ -8233,7 +8233,7 @@ function amdefine(module, requireFn) {
 
 module.exports = amdefine;
 
-}).call(this,require('_process'),"/node_modules/handlebars/node_modules/source-map/node_modules/amdefine/amdefine.js")
+}).call(this,require('_process'),"/node_modules\\handlebars\\node_modules\\source-map\\node_modules\\amdefine\\amdefine.js")
 
 },{"_process":3,"path":2}],46:[function(require,module,exports){
 /*!
@@ -38047,55 +38047,84 @@ module.exports = function numberFormat(number, dec, dsep, tsep) {
 var $ = require('jquery');
 var _ = require('lodash');
 var slick = require('slick-carousel');
-var Handlebars = require('handlebars');
 
-var el = null;
-var thumbs = null;
-var thumbsWrapper = null;
-var menuContainer = null;
-var modal = null;
-var modalGallery = null;
+var $el = null;
+var $thumbs = null;
 var $modal = $("<div></div>");
 var $body = $(document.body);
+var $window = $(window);
+var index = 0;
 
-$modal.addClass("fullscreen open");
+$modal.addClass("modal");
 
 function init(params) {
 	offer = params.offer;
 
-	el = $('#gallery');
-	thumbs = $('.gallery-thumb');
-	thumbsWrapper = $('.gallery-thumbs');
-	menuContainer = $('.gallery-nav');
-	modal = $('.fullscreen');
+	$el = $('#gallery');
+	$thumbs = $('.gallery-thumb');
+	modal = $('.modal');
 
-	createModal();
-
-	el.add(thumbs).on('click', openModal);
-	$('.modal-gallery-close').on('click', closeModal);
+	$el.add($thumbs).on('click', openModal);
+  $modal.on("click", ".modal__close", closeModal);
+  $modal.on("click", ".arrow--next", modalNext);
+  $modal.on("click", ".arrow--prev", modalPrev);
+  $modal.on("click", ".modal__thumb", modalChangePhoto);
 }
 
-function toPhoto() {
-	var $this = $(this);
-	var photoIndex = $this.data('index');
-	thumbs.removeClass('active');
-	$this.addClass('active');
-	el.slick('slickGoTo', photoIndex);
-}
-
-function createModal() {
+function renderModal(index) {
 	var source   = $("#gallerymodal-template").html();
-	var template = Handlebars.compile(source);
-	$modal.html(template(offer.photos));
+	var template = _.template(source);
+	$modal.html(template({offer: offer, index: index}));
 }
 
 function openModal() {
+  index = Number($(this).data("photo-index"));
+  renderModal(index);
   $modal.addClass('open');
   $body.append($modal);
 }
 
 function closeModal() {
-  $modal.remove();
+  $modal.detach();
+}
+
+function modalNext() {
+  if (index != offer.photos.length - 1) {
+    index++;
+  } else {
+    index = 0;
+  }
+
+  updateModal();
+}
+
+function modalPrev() {
+  console.log(index);
+  if (index > 0) {
+    index--;
+  } else {
+    index = offer.photos.length - 1;
+  }
+
+  updateModal();
+}
+
+function modalChangePhoto() {
+  index = Number($(this).data("photo-index"));
+  updateModal();
+}
+
+function updateModal() {
+  $modal.find(".modal__photo")
+    .css("background-image", "url(public/assets/"+offer.photos[index]+")");
+
+  $modal.find(".modal__thumb").removeClass("modal__thumb--selected");
+
+  var $selectedThumb = $modal.find(".modal__thumb[data-photo-index='"+index+"']");
+  $selectedThumb.addClass("modal__thumb--selected");
+
+  $modal.find(".modal__navigator-wrapper")
+    .animate({scrollLeft: $selectedThumb.offset().left + 10}, 500);
 }
 
 module.exports = {
@@ -38104,7 +38133,7 @@ module.exports = {
 	closeModal: closeModal,
 };
 
-},{"handlebars":33,"jquery":46,"lodash":47,"slick-carousel":49}],52:[function(require,module,exports){
+},{"jquery":46,"lodash":47,"slick-carousel":49}],52:[function(require,module,exports){
 (function (global){
 var $ = require('jquery');
 var select2 = require('select2');
@@ -38183,8 +38212,6 @@ function getFilteredDaily(selectedSaida, selectedDiarias) {
 }
 
 module.exports = {
-	init: init,
-	sync: sync,
 	offer: function() { return offer; },
 	getFilteredOptions: getFilteredOptions,
 	getFilteredFrom: getFilteredFrom,
