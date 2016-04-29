@@ -13,7 +13,7 @@ module.exports = function(config) {
       //'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
 			'test/**/*.spec.js',
 			{
-				pattern:  'test/fixtures/*.html',
+				pattern:  'test/client/fixtures/*.html',
 				watched: true,
 				included: false,
 				served: true

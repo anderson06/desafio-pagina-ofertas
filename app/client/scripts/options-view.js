@@ -4,9 +4,9 @@ var numberFormat = require("underscore.string/numberFormat");
 
 _.numberFormat = numberFormat;
 
-var options = [];
-var selectedSaida = "todas";
-var selectedDiarias = "todas";
+var options;
+var selectedSaida;
+var selectedDiarias;
 var saidasEl;
 var diariasEl;
 var optionsEl;
@@ -15,6 +15,10 @@ var optionsTpl;
 var model;
 
 function init(params) {
+  options = [];
+  selectedSaida = "todas";
+  selectedDiarias = "todas";
+
   model = params.model;
 
 	options = _.sortBy(params.offer.options, 'price');
@@ -59,4 +63,5 @@ function render() {
 
 module.exports = {
 	init: init,
+  render: render
 }

@@ -2,99 +2,90 @@
 var $ = require('jquery');
 var _ = require('lodash');
 
-var $el = null;
-var $thumbs = null;
-var $modal = $("<div></div>");
-var $body = $(document.body);
-var $window = $(window);
-var index = 0;
+function Gallery(params) {
+	this.$el = $('#gallery');
+	this.$thumbs = $('.gallery__thumb');
+  this.$modal = $("<div></div>");
+  this.$modal.addClass("modal");
+  this.$body = $(document.body);
+  this.$window = $(window);
+  this.index = 0;
 
-$modal.addClass("modal");
+	this.offer = params.offer;
 
-function init(params) {
-	offer = params.offer;
-
-	$el = $('#gallery');
-	$thumbs = $('.gallery__thumb');
-	modal = $('.modal');
-
-	$el.add($thumbs).on('click', openModal);
-  $modal.on("click", ".modal__close", closeModal);
-  $modal.on("click", ".arrow--next", modalNext);
-  $modal.on("click", ".arrow--prev", modalPrev);
-  $modal.on("click", ".modal__thumb", modalChangePhoto);
+	this.$el.add(this.$thumbs).on('click', _.bind(this.openModal, this));
+  this.$modal.on("click", ".modal__close", _.bind(this.closeModal, this));
+  this.$modal.on("click", ".arrow--next", _.bind(this.modalNext, this));
+  this.$modal.on("click", ".arrow--prev", _.bind(this.modalPrev, this));
+  this.$modal.on("click", ".modal__thumb", _.bind(this.modalChangePhoto, this));
 }
 
-function renderModal(index) {
+Gallery.prototype.renderModal = function(index) {
+
 	var source   = $("#gallerymodal-template").html();
 	var template = _.template(source);
-	$modal.html(template({offer: offer, index: index}));
+	this.$modal.html(template({offer: this.offer, index: index}));
 }
 
-function openModal() {
-  index = Number($(this).data("photo-index"));
-  renderModal(index);
-  $modal.addClass('open');
-  $body.append($modal);
+Gallery.prototype.openModal = function(event) {
+  this.index = Number($(event.currentTarget).data("photo-index"));
+  this.renderModal(this.index);
+  this.$modal.addClass('open');
+  this.$body.append(this.$modal);
 }
 
-function closeModal() {
-  $modal.detach();
+Gallery.prototype.closeModal = function() {
+  this.$modal.detach();
 }
 
-function modalNext() {
-  if (index != offer.photos.length - 1) {
-    index++;
+Gallery.prototype.modalNext = function() {
+  if (this.index != this.offer.photos.length - 1) {
+    this.index++;
   } else {
-    index = 0;
+    this.index = 0;
   }
 
-  updateModal();
+  this.updateModal();
 }
 
-function modalPrev() {
-  console.log(index);
-  if (index > 0) {
-    index--;
+Gallery.prototype.modalPrev = function() {
+  if (this.index > 0) {
+    this.index--;
   } else {
-    index = offer.photos.length - 1;
+    this.index = this.offer.photos.length - 1;
   }
 
-  updateModal();
+  this.updateModal();
 }
 
-function modalChangePhoto() {
-  index = Number($(this).data("photo-index"));
-  updateModal();
+Gallery.prototype.modalChangePhoto = function() {
+  this.index = Number($(this).data("photo-index"));
+  this.updateModal();
 }
 
-function updateModal() {
-  $modal.find(".modal__photo")
-    .css("background-image", "url(public/assets/"+offer.photos[index]+")");
+Gallery.prototype.updateModal = function() {
+  this.$modal.find(".modal__photo")
+    .css("background-image", "url(public/assets/"+offer.photos[this.index]+")");
 
-  $modal.find(".modal__thumb").removeClass("modal__thumb--selected");
+  this.$modal.find(".modal__thumb").removeClass("modal__thumb--selected");
 
-  var $selectedThumb = $modal.find(".modal__thumb[data-photo-index='"+index+"']");
+  var $selectedThumb = this.$modal.find(".modal__thumb[data-photo-index='"+this.index+"']");
   $selectedThumb.addClass("modal__thumb--selected");
 
-  var $parent = $modal.find(".modal__navigator-wrapper");
+  var $parent = this.$modal.find(".modal__navigator-wrapper");
 
-  $modal.find(".modal__navigator-wrapper")
+  this.$modal.find(".modal__navigator-wrapper")
     .animate({scrollLeft: $selectedThumb.offset().left + $parent.scrollLeft() - 10}, 500);
 }
 
-module.exports = {
-	init: init,
-	openModal: openModal,
-	closeModal: closeModal,
-};
+module.exports = Gallery;
 
 },{"jquery":5,"lodash":6}],2:[function(require,module,exports){
 (function (global){
 var $ = require('jquery');
 var select2 = require('select2');
 var model = require('./model');
-var gallery = require('./gallery');
+var Gallery = require('./gallery');
 var optionsView = require('./options-view');
 
 var offer = global.offer;
@@ -103,7 +94,7 @@ console.log(offer);
 
 initializeDropdowns();
 model.init({offer: offer});
-gallery.init({offer: offer, model: model});
+var gallery = new Gallery({offer: offer, model: model});
 optionsView.init({offer: offer, model: model});
 
 function initializeDropdowns() {
@@ -128,6 +119,10 @@ function init(params) {
 	options = _.sortBy(offer.options, 'price');
 }
 
+function data() {
+  return offer;
+}
+
 function getFilteredOptions(selectedSaida, selectedDiarias) {
 	return _.chain(options)
 		.filter(function(option) {
@@ -139,16 +134,16 @@ function getFilteredOptions(selectedSaida, selectedDiarias) {
 		.value();
 }
 
-function getFilteredFrom(selectedSaida, selectedDiarias) {
+function getFilteredFrom(origin, daily) {
 	return _.chain(options)
 		.filter(function(option) {
-			return selectedDiarias !== "todas" ? option.daily === selectedDiarias : true;
+			return daily !== "todas" ? option.daily === daily : true;
 		})
 		.map(function(option) { return option.from; })
 		.flatten()
 		.sort()
 		.uniq()
-		.map(function(saida) { return {selected: saida === selectedSaida, text: saida}; })
+		.map(function(saida) { return {selected: saida === origin, text: saida}; })
 		.value();
 }
 
@@ -166,6 +161,7 @@ function getFilteredDaily(selectedSaida, selectedDiarias) {
 
 module.exports = {
   init: init,
+  data: data,
 	getFilteredOptions: getFilteredOptions,
 	getFilteredFrom: getFilteredFrom,
 	getFilteredDaily: getFilteredDaily
@@ -178,9 +174,9 @@ var numberFormat = require("underscore.string/numberFormat");
 
 _.numberFormat = numberFormat;
 
-var options = [];
-var selectedSaida = "todas";
-var selectedDiarias = "todas";
+var options;
+var selectedSaida;
+var selectedDiarias;
 var saidasEl;
 var diariasEl;
 var optionsEl;
@@ -189,6 +185,10 @@ var optionsTpl;
 var model;
 
 function init(params) {
+  options = [];
+  selectedSaida = "todas";
+  selectedDiarias = "todas";
+
   model = params.model;
 
 	options = _.sortBy(params.offer.options, 'price');
@@ -233,6 +233,7 @@ function render() {
 
 module.exports = {
 	init: init,
+  render: render
 }
 
 },{"jquery":5,"lodash":6,"underscore.string/numberFormat":8}],5:[function(require,module,exports){

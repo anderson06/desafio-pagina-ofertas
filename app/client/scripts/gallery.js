@@ -20,13 +20,14 @@ function Gallery(params) {
 }
 
 Gallery.prototype.renderModal = function(index) {
+
 	var source   = $("#gallerymodal-template").html();
 	var template = _.template(source);
-	this.$modal.html(template({offer: this.offer, index: this.index}));
+	this.$modal.html(template({offer: this.offer, index: index}));
 }
 
-Gallery.prototype.openModal = function() {
-  this.index = Number($(this).data("photo-index"));
+Gallery.prototype.openModal = function(event) {
+  this.index = Number($(event.currentTarget).data("photo-index"));
   this.renderModal(this.index);
   this.$modal.addClass('open');
   this.$body.append(this.$modal);
@@ -63,11 +64,11 @@ Gallery.prototype.modalChangePhoto = function() {
 
 Gallery.prototype.updateModal = function() {
   this.$modal.find(".modal__photo")
-    .css("background-image", "url(public/assets/"+offer.photos[index]+")");
+    .css("background-image", "url(public/assets/"+offer.photos[this.index]+")");
 
   this.$modal.find(".modal__thumb").removeClass("modal__thumb--selected");
 
-  var $selectedThumb = this.$modal.find(".modal__thumb[data-photo-index='"+index+"']");
+  var $selectedThumb = this.$modal.find(".modal__thumb[data-photo-index='"+this.index+"']");
   $selectedThumb.addClass("modal__thumb--selected");
 
   var $parent = this.$modal.find(".modal__navigator-wrapper");

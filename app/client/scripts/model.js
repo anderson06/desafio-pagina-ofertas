@@ -9,6 +9,10 @@ function init(params) {
 	options = _.sortBy(offer.options, 'price');
 }
 
+function data() {
+  return offer;
+}
+
 function getFilteredOptions(selectedSaida, selectedDiarias) {
 	return _.chain(options)
 		.filter(function(option) {
@@ -20,16 +24,16 @@ function getFilteredOptions(selectedSaida, selectedDiarias) {
 		.value();
 }
 
-function getFilteredFrom(selectedSaida, selectedDiarias) {
+function getFilteredFrom(origin, daily) {
 	return _.chain(options)
 		.filter(function(option) {
-			return selectedDiarias !== "todas" ? option.daily === selectedDiarias : true;
+			return daily !== "todas" ? option.daily === daily : true;
 		})
 		.map(function(option) { return option.from; })
 		.flatten()
 		.sort()
 		.uniq()
-		.map(function(saida) { return {selected: saida === selectedSaida, text: saida}; })
+		.map(function(saida) { return {selected: saida === origin, text: saida}; })
 		.value();
 }
 
@@ -47,6 +51,7 @@ function getFilteredDaily(selectedSaida, selectedDiarias) {
 
 module.exports = {
   init: init,
+  data: data,
 	getFilteredOptions: getFilteredOptions,
 	getFilteredFrom: getFilteredFrom,
 	getFilteredDaily: getFilteredDaily
